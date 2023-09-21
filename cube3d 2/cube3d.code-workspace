@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../../goinfre/raycasting"
+		},
+		{
+			"path": "../so+long"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"__hash_table": "c",
+			"__locale": "c",
+			"algorithm": "c",
+			"memory_resource": "c",
+			"locale": "c"
+		}
+	}
+}
