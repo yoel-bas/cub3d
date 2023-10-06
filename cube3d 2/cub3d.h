@@ -2,25 +2,38 @@
 # define CUB3D_H
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 3
+#  define TILE_SIZE 32
 # endif
 
 
 #include "../MLX42/include/MLX42/MLX42.h"
 #include <libc.h>
 #include <math.h>
+typedef struct r
+{
+	double FOV_ANGLE;
+	double num_arays;
+	int face_up;
+	int face_down;
+	int face_right;
+	int face_left;
+	double wall_horzx;
+	double wall_horzy;
+}		t_ray;
 typedef struct p
 {
-	int	x;
+	double	x;
 	double	x_r;
-	int 	y;
+	double 	y;
 	double	y_r;
-	int radius;
-	int turn_direction;
-	int walk_direction;
+	double radius;
+	double turn_direction;
+	double walk_direction;
 	double r_angle;
-	int speed;
+	double speed;
 	double r_speed;
-	int flg;
+	double flg;
+	double steps;
 }		t_player;
 typedef struct element
 {
@@ -55,6 +68,7 @@ typedef struct element
 	int w_x;
 	int w_y;
 	t_player *player;
+	t_ray *ray;
 }			t_way;
 char	*get_next_line(int fd);
 void	ft_bzero(void *s, size_t n);
