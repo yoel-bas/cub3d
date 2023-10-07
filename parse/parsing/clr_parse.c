@@ -16,13 +16,13 @@ void clr_parse(char *str)
 
     splt = ft_split(str, ',');
     if (!splt[2] || splt[3])
-        ft_error("ERROR: incorrect RGB format1");
+        ft_error("ERROR: incorrect RGB format");
     j = 0;
     while(splt[j])
     {
         printf(">> |%s|\n", splt[j]);
         if (ft_atoi(splt[j]) > 255 || ft_atoi(splt[j]) < 0)
-            ft_error("ERROR: incorrect RGB format2");
+            ft_error("ERROR: incorrect RGB format");
         i = 0;
         while (splt[j][i])
         {
@@ -30,7 +30,7 @@ void clr_parse(char *str)
             if (splt[j][i] == '\n')
                 break ;
             if (!ft_is_digit(splt[j][i]))
-                ft_error("ERROR: incorrect RGB format3");
+                ft_error("ERROR: incorrect RGB format");
             i++;
         }
         j++;

@@ -31,9 +31,9 @@ void	check_top_bottom(char **map)
 	i = 0;
 	while (map[j][i])
 	{
-		if (map[0][i] == '\n')
-			break ;
-		if (map[j][i] != 1)
+		if (map[j][i] == '\n')
+			return ;
+		if (map[j][i] != '1')
 			ft_error("ERROR: Missing walls!");
 		i++;
 	}
@@ -57,9 +57,9 @@ void	ft_line_check(char *lng, char *shrt)
 	int	i;
 
 	i = ft_strlen(shrt);
-	while (lng[i] != '\0')
+	while (lng[i])
 	{
-		if (lng[i] != '1')
+		if (lng[i] != '1' && lng[i] != '\n')
 			ft_error("ERROR: Unsealed perimeter");
 		i++;
 	}
@@ -73,7 +73,7 @@ void	check_extranous_spaces(char **map)
 	j = 0;
 	while (map[j])
 	{
-		if (ft_strlen(map[j]) != ft_strlen(map[j + 1]))
+		if (map[j + 1] && ft_strlen(map[j]) != ft_strlen(map[j + 1]))
 		{
 			if (ft_strlen(map[j]) > ft_strlen(map[j + 1]))
 				ft_line_check(map[j], map[j + 1]);
