@@ -34,7 +34,7 @@ SRC = ft_bzero.c \
 	  draw.c 
 
 CC = cc
-CFLAGS = -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
 OBJ = $(SRC:.c=.o)

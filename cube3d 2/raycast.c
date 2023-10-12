@@ -288,7 +288,6 @@ void	cast_ray(t_cube *main_game, double angle, int *i)
 	else 
 		texturs_x = (int)(main_game->ray->wall_horzx * ((float)sight->width / TILE_SIZE)) % sight->width;
 		// texturs_x = (int)((main_game->ray->wall_horzx * sight->width) / TILE_SIZE) % sight->width;
-	int mm;
 	while(y < wall_bottom)
 	{
 	 	int mm = y + ( wallstrip / 2) - (main_game->y_p / 2); 
@@ -371,30 +370,43 @@ void	draw_map(t_cube *main_game)
 
 	} 
 }
-void	ceiling_floor(t_cube *main_game)
+
+int ceiling_color(t_cube *main_game, int upper_half)
 {
-	int up_half;
-	int x = 0;
-	int y = 0;
-	up_half = main_game->y_p / 2;
-	while(y < up_half)
+	int x;
+	int y;
+	char	**splt;
+
+	splt = ft_split(main_game->cl->cl, ',');
+	y = 0;
+	while(y < upper_half)
 	{
-	x = 0;
+		x = 0;
 		while(x < main_game->x_p)
 		{
-			unsigned int color_cl = ft_pixel(main_game->cl->cl[0] ,main_game->cl->cl[1],main_game->cl->cl[2],255);
+			unsigned int color_cl = ft_pixel(ft_atoi(splt[0]) , ft_atoi(splt[1]), ft_atoi(splt[2]), 255);
 			mlx_put_pixel(main_game->image, x, y, color_cl);
 			x++;
 		}
 	y++;
 	}
-	y = up_half;
+	return(y);
+}
+
+void	floor_color(t_cube *main_game, int lower_half)
+{
+	int y;
+	int x;
+	char **splt;
+
+	splt = ft_split(main_game->cl->fl, ',');
+	y = lower_half;
 	while(y < main_game->y_p)
 	{
 	x = 0;
 		while(x < main_game->x_p)
 		{
-			unsigned int color_fl = ft_pixel(main_game->cl->fl[0] ,main_game->cl->fl[1],main_game->cl->fl[2],255);
+			unsigned int color_fl = ft_pixel(ft_atoi(splt[0]), ft_atoi(splt[1]), ft_atoi(splt[2]), 255);
 			// printf("%s\n", main_game->cl->fl);
 			// printf("%s\n", main_game->cl->fl[1]);
 			mlx_put_pixel(main_game->image, x, y, color_fl);
@@ -402,6 +414,21 @@ void	ceiling_floor(t_cube *main_game)
 		}
 	y++; 
 	}
+}
+
+void	ceiling_floor(t_cube *main_game)
+{
+	// floor_color(main_game);
+	int upper_half;
+	int lower_half;
+	// char	**splt_cl;
+	// char	**splt_fl;
+
+	// splt_cl = ft_split(main_game->cl->cl, ',');
+	upper_half = main_game->y_p / 2;
+	lower_half = ceiling_color(main_game, upper_half);
+	// y = upper_half;
+	floor_color(main_game, lower_half);
 }
 
 void	frame(void * main)
