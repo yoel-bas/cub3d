@@ -34,7 +34,7 @@ SRC = ft_bzero.c \
 	  draw.c 
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -g -fsanitize=address
 RM = rm -rf
 
 OBJ = $(SRC:.c=.o)
@@ -44,7 +44,7 @@ all: ${NAME}
 
 ${NAME}: $(OBJ)
 	# $(CC) $(CFLAGS) $^ -lmlx -framework OpenGL -framework AppKit  -o $@
-	$(CC) $(CFLAGS) $^ ../MLX42/build/libmlx42.a -Iinclude -lglfw -L"/Users/yoel-bas/.brew/opt/glfw/lib/" -o $@
+	$(CC) $(CFLAGS) $^ ../MLX42/build/libmlx42.a -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -o $@
 
 %.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@

@@ -9,7 +9,15 @@ void	player_init(t_cube *main_game)
 	main_game->player->flg = 0;
 	main_game->ray->FOV_ANGLE = 60 * (M_PI / 180);
 	main_game->ray->num_arays =  main_game->ray->FOV_ANGLE / main_game->x_p;
+	main_game->iter = 0;
 }
+
+unsigned int ft_pixel(unsigned int r, unsigned int g, unsigned int b, unsigned int a)
+{
+	// printf("%X\n", r << 24 | g << 16 | b << 8 | a);
+    return (r << 24 | g << 16 | b << 8 | a);
+}
+
 void	get_player_pos(t_cube *main_game)
 {
 	int y = 0;
@@ -177,6 +185,49 @@ void	horizontal_cast(t_cube *main_game,double angle)
 	main_game->ray->wall_horzx = check_x;
 	main_game->ray->wall_horzy = check_y;
 }
+
+// unsigned int get_color(t_cube *main_game, unsigned int y_texture, unsigned int x_texture)
+// {
+// 	unsigned int rgb0 = (y_texture * main_game->m_north->width  + x_texture) * 4 ;
+// 	unsigned int rgb1 = (y_texture * main_game->m_north->width  + x_texture) * 4 + 1;
+// 	unsigned int rgb2 = (y_texture * main_game->m_north->width  + x_texture) * 4 + 2;
+// 	unsigned int rgb3 = (y_texture * main_game->m_north->width  + x_texture) * 4 + 3;
+	
+// 	return (ft_pixel(rgb0, rgb1, rgb2, rgb3));
+// }
+
+unsigned int get_color(t_cube *main_game, unsigned int y_texture, unsigned int x_texture)
+{
+	//printf("ana = %d %d %d %d\n", main_game->m_north->pixels[0], main_game->m_north->pixels[1], main_game->m_north->pixels[2], main_game->m_north->pixels[3]);
+    // Check for valid inputs and dimensions
+    if (main_game == NULL || main_game->m_north == NULL || y_texture >= main_game->m_north->height || x_texture >= main_game->m_north->width) {
+        return 0; // Default color (black or another valid color)
+    }
+	uint8_t *colors = &main_game->m_north->pixels[(y_texture * main_game->m_north->width + x_texture) * 4];
+	//uint8_t* pixelstart = &image->pixels[(y * image->width + x) * BPP];
+
+    // Calculate the offsets for each RGB component
+    // unsigned int offset0 = main_game->m_north->pixels[(y_texture * main_game->m_north->width) + x_texture];
+
+	//printf("ana = %d %d %d %d\n", main_game->m_north->pixels[offset0], main_game->m_north->pixels[offset0 + 1], main_game->m_north->pixels[offset0 + 2], main_game->m_north->pixels[offset0 + 3]);
+
+    // unsigned int offset1 = offset0 + 1;
+    // unsigned int offset2 = offset0 + 2;
+    // unsigned int offset3 = offset0 + 3;
+
+
+    // Call ft_pixel function with the calculated offsets
+	//printf("%d %d %d %d\n", colors[0], colors[1], colors[2], colors[4]);
+	//exit(0);
+	//unsigned int a = ft_pixel(colors[1], colors[2], colors[3], colors[0]);
+	//printf("%d\n", a);
+    return ft_pixel(colors[0], colors[1], colors[2], colors[3]);
+	//return (*colors);
+	// return ((y_texture * main_game->m_north->width) + x_texture);
+}
+
+
+
 void	cast_ray(t_cube *main_game, double angle, int *i)
 {
 	// printf("angle  : %f \n", angle );
@@ -202,19 +253,25 @@ void	cast_ray(t_cube *main_game, double angle, int *i)
 	double vert_distance = distance(main_game->player->x, main_game->player->y, main_game->ray->wall_vertx, main_game->ray->wall_verty);
 	double hitx = 0;
 	double hity = 0;
+	main_game->check_vert = 0;
 	if(horz_distance < vert_distance)
-	{
+	{	
 		hitx = main_game->ray->wall_horzx;
 		hity = main_game->ray->wall_horzy;
 		ray_distance = horz_distance;
 	}
 	else
 	{
+		main_game->check_vert = 1;
 		hitx = main_game->ray->wall_vertx;
 		hity = main_game->ray->wall_verty;
 		ray_distance = vert_distance;
 	}
 	perpdistance = ray_distance * cos(angle - main_game->player->r_angle);
+			//printf("lsss %f\n", perpdistance);
+
+	if(perpdistance <= 0)
+		perpdistance = 4;
 	projection = (main_game->x_p / 2) / tan(main_game->ray->FOV_ANGLE / 2);
 	wallstrip = (TILE_SIZE / perpdistance) * projection;
 	wall_top = (main_game->y_p / 2) - (wallstrip / 2); 
@@ -224,9 +281,20 @@ void	cast_ray(t_cube *main_game, double angle, int *i)
 	if(wall_bottom > main_game->y_p)
 		wall_bottom = main_game->y_p;
 	int y = wall_top;
+	mlx_image_t *sight = main_game->m_north;
+	int texturs_x;
+	if (main_game->check_vert)
+		texturs_x = (int)(main_game->ray->wall_verty * ((float)sight->width / TILE_SIZE)) % sight->width;
+	else 
+		texturs_x = (int)(main_game->ray->wall_horzx * ((float)sight->width / TILE_SIZE)) % sight->width;
+		// texturs_x = (int)((main_game->ray->wall_horzx * sight->width) / TILE_SIZE) % sight->width;
+	int mm;
 	while(y < wall_bottom)
 	{
-		mlx_put_pixel(main_game->image, *i, y, 0xffffff);
+	 	int mm = y + ( wallstrip / 2) - (main_game->y_p / 2); 
+        int y_texture = mm * ((double)sight->height / wallstrip);
+		unsigned int color = get_color(main_game, y_texture, texturs_x);
+		mlx_put_pixel(main_game->image, *i, y, color);
 		y++;
 	}
 	line(main_game, main_game->player->x  * SCALE , main_game->player->y  * SCALE, hitx  * SCALE , hity  * SCALE);
@@ -296,7 +364,7 @@ void	draw_map(t_cube *main_game)
 		while(main_game->lmt->map[y][x])
 		{
 			if(main_game->lmt->map[y][x] == '1')
-				draw_w(main_game, &x,&y, 0xEBCAC3);
+				draw_w(main_game, &x,&y, 0xFF0000);
 			x++;
 		}
 		y++;
@@ -314,7 +382,8 @@ void	ceiling_floor(t_cube *main_game)
 	x = 0;
 		while(x < main_game->x_p)
 		{
-			mlx_put_pixel(main_game->image, x, y, 0xE8D40D);
+			unsigned int color_cl = ft_pixel(main_game->cl->cl[0] ,main_game->cl->cl[1],main_game->cl->cl[2],255);
+			mlx_put_pixel(main_game->image, x, y, color_cl);
 			x++;
 		}
 	y++;
@@ -325,12 +394,16 @@ void	ceiling_floor(t_cube *main_game)
 	x = 0;
 		while(x < main_game->x_p)
 		{
-			mlx_put_pixel(main_game->image, x, y, 0x682641);
+			unsigned int color_fl = ft_pixel(main_game->cl->fl[0] ,main_game->cl->fl[1],main_game->cl->fl[2],255);
+			// printf("%s\n", main_game->cl->fl);
+			// printf("%s\n", main_game->cl->fl[1]);
+			mlx_put_pixel(main_game->image, x, y, color_fl);
 			x++;
 		}
-	y++;
+	y++; 
 	}
 }
+
 void	frame(void * main)
 {
 	t_cube* main_game = (t_cube *)main;
@@ -359,6 +432,46 @@ void dd_callback(void *param)
     frame(main_game);
 }
 
+
+
+
+void ft_upload_texture_img(t_cube *main_game)
+{
+	
+	main_game->north_img = mlx_load_png("textures/download.png");
+	// main_game->north_img->pixels;
+	main_game->m_north = mlx_texture_to_image(main_game->mlx, main_game->north_img);
+	if (!main_game->m_north)
+		exit(2);
+
+	// main_game->south_img = mlx_load_png(main_game->cp->s); // height width "important!!"
+	// main_game->north_img = mlx_load_png(main_game->cp->e); // height width "important!!"
+	// main_game->north_img = mlx_load_png(main_game->cp->w); // height width "important!!"
+	if (!main_game->north_img)
+		ft_error("ERROR: load_png failed");
+	// for (size_t i = 0; i < main_game->north_img->width * main_game->north_img->height)
+	// {
+	// 	printf("%hhu\n", main_game->north_img->pixels[i]);
+	// }
+	
+	// printf("%ld | %u\n",  m_north->pixels, (main_game->north_img->width * main_game->north_img->height));
+	// // exit(1);
+	// main_game->rgbs[0] = ft_calloc(sizeof(int), ((main_game->north_img->width * main_game->north_img->height) / 4));
+	// main_game->rgbs[1] = ft_calloc(sizeof(int), main_game->south_img->width * main_game->south_img->height);
+	// main_game->rgbs[2] = ft_calloc(sizeof(int), main_game->east_img->width * main_game->east_img->height);
+	// main_game->rgbs[3] = ft_calloc(sizeof(int), main_game->west_img->width * main_game->west_img->height);
+
+	// unsigned int i = 0;
+	// int j = 0;
+	// while (i < (main_game->north_img->width * main_game->north_img->height) / 4)
+	// {
+	// 	main_game->rgbs[0][i] = ft_pixel(main_game->north_img->pixels[j], main_game->north_img->pixels[j + 1], main_game->north_img->pixels[j + 2], main_game->north_img->pixels[j + 3]);
+	// 	i++;
+	// 	// if (j <= main_game->north_img->width * main_game->north_img->height * 4) // -4 for some reason ?? 
+	// 	j += 4;
+	// }
+}
+
 void	cub(t_cube *main_game)
 {
 	int i = 0;
@@ -382,6 +495,8 @@ void	cub(t_cube *main_game)
 	player_init(main_game);
 	main_game->mlx = mlx_init(main_game->x_p ,main_game->y_p , "cube", FALSE);
 	main_game->image = mlx_new_image(main_game->mlx,main_game->x_p , main_game->y_p);
+	mlx_put_pixel(main_game->image, 0, 0, ft_pixel(255, 172, 28, 255));
+	ft_upload_texture_img(main_game);
 	frame(main_game);	
 	mlx_loop_hook(main_game->mlx, dd_callback, main_game);
 	mlx_loop(main_game->mlx);

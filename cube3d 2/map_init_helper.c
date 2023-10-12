@@ -126,3 +126,84 @@ void	read_components(t_cube *content)
 	if (!content->lmt->file[j])
 		ft_error("empty map!");
 }
+
+
+
+
+
+
+
+// char	*ft_fill_cmp(char *line, int flag)
+// {
+// 	int		i;
+// 	int		start;
+// 	int		end;
+// 	char	*str;
+
+// 	// if (flag == 2)
+// 	// 	i = 2;
+// 	// else
+// 	// 	i = 1;
+// 	i = 2;
+// 	if(!is_white_space(line[i]))
+// 		ft_error("ERROR: incorrect dir/clr syntax!");
+// 	while (is_white_space(line[i]))
+// 		i++;
+// 	start = i;
+// 	while(line[i])
+// 		i++;
+// 	end = i;
+// 	str = ft_substr(line, start, end - start);
+// 	// if (flag == 1)
+// 	// 	clr_parse(str);
+// 	return (str);
+// }
+
+// void	ft_fill_clrs(char *line, t_cube *cnt, int flag)
+// {
+// 	int i;
+// 	int end;
+// 	int start;
+// 	char *str;
+
+// 	i = 1;
+// 	if(!is_white_space(line[i]))
+// 		ft_error("ERROR: incorrect dir/clr syntax!");
+// 	while (is_white_space(line[i]))
+// 		i++;
+// 	while(line[i])
+// 		i++;
+// 	end = i;
+// 	str = ft_substr(line, start, end - start);
+// 	if (flag)
+// 		clr_parse(str, cnt, 1);
+// 	else
+// 		clr_parse(str, cnt, 0);
+// }
+
+// void	ft_fill_map(t_cube *content, int *j)
+// {
+// 	int y = 0;
+// 	content->lmt->map = malloc(sizeof(char **) * line_count(content->lmt->file, &(*j)));
+// 	if (!content->lmt->map)
+// 		ft_error("ERROR: alloc error!");
+// 	while (content->lmt->file[*j])
+// 	{
+// 		content->lmt->map[y] = ft_strcpy(content->lmt->file[*j]);
+//         ft_empty_line(content->lmt->map[y]);
+// 		(*j)++;
+// 		y++;
+// 	}
+// 	content->lmt->map[y] = NULL;
+// }
+
+// void	ft_is_clr(char *line, t_cube *cnt)
+// {
+// 	if (!ft_strncmp(line, "F", 1)  && !cnt->cl->fl)
+// 		ft_fill_clrs(line, cnt, 0);
+// 	else if (!ft_strncmp(line, "C", 1) && !cnt->cl->cl)
+// 		ft_fill_clrs(line, cnt, 1);
+// 	else
+// 		ft_error("ERROR: floor/ceiling plan!");
+// 	free(line);
+// }

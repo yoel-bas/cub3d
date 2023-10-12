@@ -30,6 +30,8 @@ typedef struct colors
 {
 	char	*fl;
 	char	*cl;
+	// char 	**fl;
+	// char 	**cl;
 }			t_clr;
 
 
@@ -65,11 +67,13 @@ typedef struct element
 {
 	mlx_image_t *image;
 	mlx_image_t *image2;
+	mlx_image_t *m_north;
 	float		coins;
 	float		x_p;
 	float		y_p;
 	float		x_p1;
 	float		y_p1;
+	int		check_vert;
 	char	**map;
 	char	**map1;
 	char	**map2;
@@ -92,13 +96,20 @@ typedef struct element
 	float		line_length;
 	float		endian;
 	float w_x;
+	mlx_texture_t *north_img;
+	mlx_texture_t *west_img;
+	mlx_texture_t *south_img;
+	mlx_texture_t *east_img;
 	float w_y;
 	t_player *player;
 	t_ray *ray;
 	t_cmp	*cp;
 	t_clr	*cl;
 	t_elem	*lmt;
+	char 	**rgbs;
+	int		iter;
 }			t_cube;
+
 char	*get_next_line(int fd);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nitems, size_t size);
@@ -142,7 +153,7 @@ int 	fullfilled(t_cube *cnt);
 int		line_count(char  **dbl, int *j);
 int		is_white_space(char x);
 void	clr_parse(char *str);
-
+// void    clr_parse(char *str, t_cube *content, int flag);
 void	read_components(t_cube *content);
 void	maper(t_cube	*content, char	*av);
 #endif 
