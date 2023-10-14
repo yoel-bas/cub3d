@@ -341,7 +341,6 @@ void	cast_ray(t_cube *main_game, double angle, int *i)
 		mlx_put_pixel(main_game->image, *i, y, color);
 		y++;
 	}
-	line(main_game, main_game->player->x  * SCALE , main_game->player->y  * SCALE, hitx  * SCALE , hity  * SCALE);
 }
 void	cast(t_cube *main_game)
 {
@@ -377,7 +376,6 @@ void	player_update(t_cube *main_game)
 			main_game->player->x = old_x;
 			main_game->player->y = old_y;
 		}
-		player(main_game);
 		cast(main_game);
 }
 void	draw_w(t_cube *main_game, int *x, int* y, int color)
@@ -494,8 +492,38 @@ void	frame(void * main)
 	t_cube* main_game = (t_cube *)main;
 	ceiling_floor(main_game);
 	player_update(main_game);
-	draw_map(main_game);
 	mlx_image_to_window(main_game->mlx,main_game->image, 0 , 0);
+}
+// void dd_callback(void *param)
+// {
+//     t_cube *main_game = (t_cube *)param;
+
+//     main_game->player->walk_direction = 0;
+//     main_game->player->turn_direction = 0;
+// 	if(main_game->image)
+// 		mlx_delete_image(main_game->mlx, main_game->image);
+// 	main_game->image = mlx_new_image(main_game->mlx, (main_game->x_p), ( main_game->y_p ));
+// 	if(mlx_is_key_down(main_game->mlx, MLX_KEY_A)) 
+//     	main_game->player->turn_direction = -1;
+// 	if(mlx_is_key_down(main_game->mlx, MLX_KEY_W))
+// 		main_game->player->walk_direction = 1;
+// 	if(mlx_is_key_down(main_game->mlx, MLX_KEY_S)) 
+// 		main_game->player->walk_direction = -1;
+// 	if(mlx_is_key_down(main_game->mlx, MLX_KEY_D))
+//     	main_game->player->turn_direction = 1;
+//     frame(main_game);
+// }
+void	move_side(t_cube *main_game, int side)
+{
+	int x = main_game->player->x;
+	int y = main_game->player->y;
+	x += cos(main_game->player->r_angle + (M_PI / 2)) * side * main_game->player->speed ;
+	y += sin(main_game->player->r_angle + (M_PI / 2)) * side * main_game->player->speed ;
+	if(!is_wall(main_game, x, y))
+	{
+		main_game->player->x = x;
+		main_game->player->y = y;
+	}
 }
 void dd_callback(void *param)
 {
@@ -506,15 +534,21 @@ void dd_callback(void *param)
 	if(main_game->image)
 		mlx_delete_image(main_game->mlx, main_game->image);
 	main_game->image = mlx_new_image(main_game->mlx, (main_game->x_p), ( main_game->y_p ));
-	if(mlx_is_key_down(main_game->mlx, MLX_KEY_A)) 
+	if(mlx_is_key_down(main_game->mlx, MLX_KEY_LEFT)) 
     	main_game->player->turn_direction = -1;
 	if(mlx_is_key_down(main_game->mlx, MLX_KEY_W))
 		main_game->player->walk_direction = 1;
+	if(mlx_is_key_down(main_game->mlx, MLX_KEY_D))
+		move_side(main_game, 1);
+	if(mlx_is_key_down(main_game->mlx, MLX_KEY_A))
+		move_side(main_game, -1);
 	if(mlx_is_key_down(main_game->mlx, MLX_KEY_S)) 
 		main_game->player->walk_direction = -1;
-	if(mlx_is_key_down(main_game->mlx, MLX_KEY_D))
+	if(mlx_is_key_down(main_game->mlx, MLX_KEY_RIGHT))
     	main_game->player->turn_direction = 1;
-    frame(main_game);
+	if(mlx_is_key_down(main_game->mlx, MLX_KEY_ESCAPE))
+		exit(1);
+	frame(main_game);
 }
 
 void	cub(t_cube *main_game)
