@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 02:36:45 by melayoub          #+#    #+#             */
-/*   Updated: 2023/09/26 22:57:26 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/14 01:01:47 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	foreign_material(char **map)
 		{
 			if (map[j][i] == '\n')
 				break ;
-			if (map[j][i] != '1' && map[j][i] != '0')
+			if (map[j][i] != '1' && map[j][i] != '0' && map[j][i] != 'P') // N or S or W or E INSTEAD OF P
 				return (0);
 			i++;
 		}

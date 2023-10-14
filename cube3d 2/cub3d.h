@@ -114,17 +114,23 @@ typedef struct element
 
 }			t_cube;
 
+typedef struct s_garbage_collect
+{
+    void		*data;
+    struct s_garbage_collect *next;
+} 				t_gc;
+
 char	*get_next_line(int fd);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nitems, size_t size);
-int	ft_isalpha(int c);
+int		ft_isalpha(int c);
 void	*ft_memset(void *str, int c, int n);
 char	*ft_strchr(const char *str, int c);
-int	ft_strcmp(char *s1, char *s2);
+int		ft_strcmp(char *s1, char *s2);
 char	*ft_strjoin(char *s1, char *s2);
 char	ft_wrong(void);
 
-void reycast(t_cube *main_game, int fd);
+void 	reycast(t_cube *main_game, int fd);
 void	draw_ground(t_cube *main_game, int x_p, int y_p);
 void	draw_walls(t_cube *main_game, int x_p, int y_p);
 void	cub(t_cube *main_game);
@@ -160,4 +166,5 @@ void	clr_parse(char *str);
 // void    clr_parse(char *str, t_cube *content, int flag);
 void	read_components(t_cube *content);
 void	maper(t_cube	*content, char	*av);
+void	free_kolchi(t_cube *main_game);
 #endif 

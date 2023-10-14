@@ -33,6 +33,10 @@ void clr_parse(char *str)
         }
         j++;
     }
+    i = 0;
+    while(splt[i])
+        free(splt[i++]);
+    free(splt);
 }
 
 // void    clr_parse(char *str, t_cube *content, int flag)

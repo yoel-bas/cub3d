@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:38:32 by melayoub          #+#    #+#             */
-/*   Updated: 2023/09/27 17:43:16 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/13 22:53:54 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,25 +64,21 @@ void	*ft_calloc(size_t count, size_t size)
 
 char *ft_strcpy(char *src) 
 {
-	// int i;
-	// int j;
-	
-    // Calculate the length of the source string
-    size_t len = strlen(src);
+	int i;
+    size_t len;
 
-    // Allocate memory for the destination string
+	len = strlen(src);
+	i = 0;
     char *dest = (char *)malloc((len + 1) * sizeof(char));
-
-    // Check if memory allocation was successful
-    if (dest == NULL) {
-        fprintf(stderr, "Memory allocation failed\n");
-        exit(1); // Exit the program with an error code
-    }
-
-    // Copy the source string to the destination
-    strcpy(dest, src);
-
-    return dest;
+    if (!dest)
+		ft_error("Error: allocation error!");
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+    return (dest);
 }
 
 int	ft_atoi(const char *str)

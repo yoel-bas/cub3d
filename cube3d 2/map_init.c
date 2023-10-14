@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 23:40:21 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/01 17:57:46 by admin            ###   ########.fr       */
+/*   Updated: 2023/10/14 00:55:28 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int		line_counter(char *av)
 void	maper(t_cube	*content, char	*av)
 {
 	char	*line;
-	//char	*all_lines = 0;
 	int		fd;
 	char	*res = 0;
 	int		i = 0;
@@ -70,15 +69,6 @@ void	maper(t_cube	*content, char	*av)
 			break ;
 		res = alloc_n_trim(line);
 		content->lmt->file[i++] = res;
-		//all_lines = ft_strjoin(res, line);
 		free(line);
-		// if (res)
-		// 	free(res);
-		//res = all_lines;
 	}
-	// for (int i = 0; content->lmt->map[i]; i++)
-		// printf("%s", content->lmt->map[i]);
-	// while (1);
-	// content->lmt->file = ft_split(res, '\n');
-	// free(all_lines);
 }

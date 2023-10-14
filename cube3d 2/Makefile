@@ -1,5 +1,5 @@
 NAME = cub3d
-HEADER = cub3d.h
+HEADER = cub3d.h 
 
 SRC = ft_bzero.c \
 	  ft_calloc.c \
@@ -16,6 +16,7 @@ SRC = ft_bzero.c \
 	  path_parse.c\
 	  clr_parse.c\
 	  get_next_line.c \
+	get_next_line_utils.c \
 	  ft_strjoin.c \
 	  cub3d.c \
 	  raycast.c \
@@ -40,7 +41,6 @@ RM = rm -rf
 OBJ = $(SRC:.c=.o)
 
 all: ${NAME}
-
 
 ${NAME}: $(OBJ)
 	# $(CC) $(CFLAGS) $^ -lmlx -framework OpenGL -framework AppKit  -o $@

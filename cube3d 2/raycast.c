@@ -427,6 +427,14 @@ int ceiling_color(t_cube *main_game, int upper_half)
 		}
 	y++;
 	}
+	int f = 0;
+	while(splt[f])
+	{
+		// printf("%p | %s\n", splt[f], splt[f]);
+		free(splt[f++]);
+	}
+	free(splt);
+	
 	return(y);
 }
 
@@ -451,6 +459,10 @@ void	floor_color(t_cube *main_game, int lower_half)
 		}
 	y++; 
 	}
+	int f = 0;
+	while(splt[f])
+		free(splt[f++]);
+	free(splt);
 }
 
 void	ceiling_floor(t_cube *main_game)

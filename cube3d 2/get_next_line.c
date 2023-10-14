@@ -3,90 +3,94 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoel-bas <yoel-bas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/20 13:54:37 by yoel-bas          #+#    #+#             */
-/*   Updated: 2023/09/11 15:20:50 by yoel-bas         ###   ########.fr       */
+/*   Created: 2022/12/08 17:29:00 by melayoub          #+#    #+#             */
+/*   Updated: 2023/10/14 00:55:50 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-
-static char	*get_line(char *str)
-{
-	int		i;
-	int		len;
-	char	*s;
-
-	i = 0;
-	if (!str[i])
-		return (NULL);
-	while (str[i] && str[i] != '\n')
-		i++;
-	len = i + 2;
-	s = malloc(len);
-	if (!s)
-		return (NULL);
-	i = 0;
-	while (str[i] && str[i] != '\n')
-	{
-		s[i] = str[i];
-		i++;
-	}
-	if (str[i] == '\n')
-		s[i++] = '\n';
-	s[i] = '\0';
-	return (s);
-}
-
-static char	*full_line(char *str)
-{
-	char	*p;
-	size_t	i;
-	int		y;
-
-	i = 0;
-	y = 0;
-	while (str[i] && str[i] != '\n')
-		i++;
-	if (str[i] == '\n')
-		i++;
-	if (i == ft_strlen(str))
-		return (free(str), NULL);
-	p = malloc((ft_strlen(str) - i) + 1);
-	if (!p)
-		return (NULL);
-	while (str[i])
-		p[y++] = str[i++];
-	p[y] = '\0';
-	return (free(str), str = NULL, p);
-}
+#include"get_next_line.h"
 
 char	*get_next_line(int fd)
 {
-	char			*buff;
-	static char		*str;
-	char			*line;
-	int				i;
+	static char	*stash;
+	char		*line;
+	char		*buf;
+	int			readed;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!str)
-		str = ft_strdup("");
-	buff = malloc(BUFFER_SIZE + 1);
-	if (!buff)
+	readed = 1;
+	buf = malloc(BUFFER_SIZE + 1);
+	if (!buf)
 		return (NULL);
-	i = 1;
-	while (i && !ft_strchr(str, '\n'))
+	while (!found_newline(stash) && readed)
 	{
-		i = read(fd, buff, BUFFER_SIZE);
-		if (i < 0)
-			return (free(buff), free(str), str = NULL, NULL);
-		buff[i] = '\0';
-		str = ft_strjoin(str, buff);
+		readed = read(fd, buf, BUFFER_SIZE);
+		if (readed < 0)
+			return (free(stash), stash = NULL, free(buf), NULL);
+		buf[readed] = '\0';
+		stash = ft_strjoin(stash, buf);
 	}
-	free(buff);
-	line = get_line(str);
-	str = full_line(str);
+	free(buf);
+	line = get_linee(stash);
+	if (!line || line[0] == 0)
+		return (free(stash), stash = NULL, free(line), NULL);
+	stash = update_it(stash);
 	return (line);
+}
+
+char	*ft_strjoin(char *str1, char *str2)
+{
+	int		len_s1;
+	int		len_s2;
+	int		i;
+	int		j;
+	char	*str;
+
+	if (!str2 && !str1)
+		return (NULL);
+	if (!str1)
+		return (ft_strdup(str2));
+	len_s1 = ft_strlen(str1);
+	len_s2 = ft_strlen(str2);
+	i = 0;
+	j = 0;
+	str = malloc((sizeof(char)) * (len_s1 + len_s2 + 1));
+	if (!str)
+		return (NULL);
+	while (str1[j])
+		str[i++] = str1[j++];
+	while (*str2)
+		str[i++] = *str2++;
+	str[i] = '\0';
+	free(str1);
+	return (str);
+}
+
+char	*get_linee(char *src)
+{
+	int		i;
+	char	*new;
+
+	i = 0;
+	while (src[i] && src[i] != '\n')
+		i++;
+	new = (char *)malloc(sizeof(char) * i + 2);
+	if (!new)
+		return (NULL);
+	i = 0;
+	while (src[i] && src[i] != '\n')
+	{
+		new[i] = src[i];
+		i++;
+	}
+	if (src[i] == '\n')
+	{
+		new[i] = src[i];
+		i++;
+	}
+	new[i] = '\0';
+	return (new);
 }
