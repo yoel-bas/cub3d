@@ -111,6 +111,7 @@ typedef struct element
 	t_elem	*lmt;
 	char 	**rgbs;
 	double ray_angle_image;
+	int		dir_flag;
 
 }			t_cube;
 
@@ -166,5 +167,7 @@ void	clr_parse(char *str);
 // void    clr_parse(char *str, t_cube *content, int flag);
 void	read_components(t_cube *content);
 void	maper(t_cube	*content, char	*av);
-void	free_kolchi(t_cube *main_game);
+// void	free_kolchi(t_cube *main_game);
+void check_dir(char **map, t_cube *content);
+
 #endif 

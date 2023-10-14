@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 02:36:45 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/14 01:01:47 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/14 16:03:22 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	foreign_material(char **map)
 		{
 			if (map[j][i] == '\n')
 				break ;
-			if (map[j][i] != '1' && map[j][i] != '0' && map[j][i] != 'P') // N or S or W or E INSTEAD OF P
+			if (map[j][i] != '1' && map[j][i] != '0' && map[j][i] != 'N' && map[j][i] != 'W' && map[j][i] != 'S' && map[j][i] != 'E')
 				return (0);
 			i++;
 		}
@@ -103,6 +103,40 @@ static int	comp_counter(char **str, char x)
 // 	else
 // 		return ;
 // }
+
+void check_dir(char **map, t_cube *content)
+{
+	int j;
+	int	i;
+
+	content->dir_flag = 0;
+	j = 0;
+	while(map[j])
+	{
+		i = 0;
+		while(map[j][i])
+		{
+			if (map[j][i] == 'N' || map[j][i] == 'S' || map[j][i] == 'E' || map[j][i] == 'W')
+			{
+				if (map[j][i] == 'N')
+					content->dir_flag = 1;
+				else if (map[j][i] == 'E')
+					content->dir_flag = 2;
+				else if (map[j][i] == 'S')
+					content->dir_flag = 3;
+				else if (map[j][i] == 'W')
+					content->dir_flag = 4;
+			}
+			i++;
+			if (content->dir_flag && (map[j][i] == 'N' || map[j][i] == 'S'
+			|| map[j][i] == 'E' || map[j][i] == 'W'))
+				ft_error("ERROR: use of multiple dirrections");			
+		}
+		j++;
+	}
+	if (!content->dir_flag)
+		ft_error("ERROR: missing dirrection.");
+}
 
 void	check_components(char **map)
 {

@@ -7,6 +7,7 @@ void	ft_parser(t_cube *content)
 	check_top_bottom(content->lmt->map);
 	check_sides(content->lmt->map);
 	check_extranous_spaces(content->lmt->map);
+	check_dir(content->lmt->map, content);
 }
 
 void	free_kolchi(t_cube *content)

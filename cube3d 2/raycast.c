@@ -5,7 +5,15 @@ void	player_init(t_cube *main_game)
 	main_game->player->walk_direction = 0;
 	main_game->player->speed = 6.00;
 	main_game->player->r_speed = 2 * (M_PI / 180);
-	main_game->player->r_angle =  M_PI / 2;
+	if(main_game->dir_flag == 1)
+		main_game->player->r_angle =  M_PI / 2;
+	if(main_game->dir_flag == 2)
+		main_game->player->r_angle =  M_PI;
+	if(main_game->dir_flag == 3)
+		main_game->player->r_angle =  (3 * M_PI) / 2;
+	if(main_game->dir_flag == 4)
+		main_game->player->r_angle =  2 * M_PI ;
+
 	main_game->player->flg = 0;
 	main_game->ray->FOV_ANGLE = 60 * (M_PI / 180);
 	main_game->ray->num_arays =  main_game->ray->FOV_ANGLE / main_game->x_p;
@@ -41,7 +49,8 @@ void	get_player_pos(t_cube *main_game)
 		x = 0;
 		while(main_game->lmt->map[y][x])
 		{	
-			if(main_game->lmt->map[y][x] == 'P')
+			if(main_game->lmt->map[y][x] == 'N' || main_game->lmt->map[y][x] == 'S'
+				|| main_game->lmt->map[y][x] == 'W' || main_game->lmt->map[y][x] == 'E')
 			{
 				main_game->player->x = x * TILE_SIZE;
 				main_game->player->y = y * TILE_SIZE;
