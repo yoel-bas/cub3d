@@ -6,42 +6,28 @@ void	ft_parser(t_cube *content)
 		ft_error("foreing material");
 	check_top_bottom(content->lmt->map);
 	check_sides(content->lmt->map);
-	check_extranous_spaces(content->lmt->map);
+	// check_extranous_spaces(content->lmt->map);
+	check_extranous_revsp(content->lmt->map);
 	check_dir(content->lmt->map, content);
-}
-
-void	free_kolchi(t_cube *content)
-{
-	free(content->cp->n);
-	free(content->cp->e);
-	free(content->cp->s);
-	free(content->cp->w);
-	free(content->cl->cl);
-	free(content->cl->fl);
-	free(content->lmt->map);
-	free(content->lmt->file);
 }
 
 int main(int ac , char **av)
 {
 
 
-    if(ac > 1)
+    if(ac == 2)
     {
-    t_cube	main_game;
-
-	if (ac != 2)
-		ft_error("ERROR: Missing or too many arguments!");
-	check_extension(av[1]);
-	
-	main_game.cl = ft_calloc(sizeof(t_clr), 1);
-	main_game.cp = ft_calloc(sizeof(t_cmp), 1);
-	main_game.lmt = ft_calloc(sizeof(t_elem), 1);
-	maper(&main_game, av[1]); 
-	read_components(&main_game);
-	ft_parser(&main_game);	
-    cub(&main_game);
-	// free_kolchi(&main_game);
+		t_cube	main_game;
+		check_extension(av[1]);
+		main_game.cl = ft_calloc(sizeof(t_clr), 1);
+		main_game.cp = ft_calloc(sizeof(t_cmp), 1);
+		main_game.lmt = ft_calloc(sizeof(t_elem), 1);
+		maper(&main_game, av[1]); 
+		read_components(&main_game);
+		ft_parser(&main_game);	
+		cub(&main_game);
     }
+	else
+		ft_error("ERROR: Missing or too many arguments!");
     return(0);
 }

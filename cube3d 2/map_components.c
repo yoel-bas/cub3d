@@ -6,27 +6,45 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 02:36:45 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/14 16:03:22 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/15 14:56:59 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int is_whitesp_butnl(char c)
+{
+	if (c == 32 || c == 9 || (c >= 11 && c <= 13))
+		return (1);
+	return (0);
+}
+
 int	foreign_material(char **map)
 {
 	int	j;
 	int	i;
+	int wall_flag;
 
 	j = 0;
 	while (map[j])
 	{
+		wall_flag = 0;
 		i = 0;
 		while (map[j][i])
 		{
+			// printf("pp-> |%s|\n", map[j]);
+			if (map[j][i] == '1')
+				wall_flag = 1;
+			while(is_whitesp_butnl(map[j][i]) && !wall_flag)
+				i++;
+			// printf("ZZ>> |%d|\n", map[j][i]);
 			if (map[j][i] == '\n')
 				break ;
 			if (map[j][i] != '1' && map[j][i] != '0' && map[j][i] != 'N' && map[j][i] != 'W' && map[j][i] != 'S' && map[j][i] != 'E')
+			{
+				// printf("XX>> |%d|\n", map[j][i]);
 				return (0);
+			}
 			i++;
 		}
 		j++;
@@ -56,53 +74,6 @@ static int	comp_counter(char **str, char x)
 	}
 	return (count);
 }
-
-// int	is_pos_dir(char x)
-// {
-// 	if (x == 'N' || x == 'S' || x == 'W' || x == 'E')
-// 		return (1);
-// 	else
-// 		return (0);
-// }
-
-// int	is_clr(char x)
-// {
-// 	if (x == 'F' || x == 'C')
-// 		return (1);
-// 	else
-// 		return (0);
-// }
-
-// void	player_pos_dir(char **file)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	flag;
-
-// 	flag = 0;
-// 	i = 0;
-// 	j = 0;
-// 	while (file[j])
-// 	{
-// 		while (file[j][i])
-// 		{
-// 			if (is_pos_dir(file[j][i]))
-// 				flag = 1;
-// 			else if (is_clr(file[j][i]))
-// 				flag = 2;
-// 			i++;
-// 			if (flag == 1 && is_pos_dir(file[j][i]))
-// 				ft_error("ERROR: More than one initial player position");
-// 			if (flag == 2  && is_clr(file[j][i]))
-// 				ft_error("ERROR: More than 2 color codes"); 
-// 		}
-// 		j++;
-// 	}
-// 	if (!flag)
-// 		ft_error("ERROR: missing player position or color code!");
-// 	else
-// 		return ;
-// }
 
 void check_dir(char **map, t_cube *content)
 {

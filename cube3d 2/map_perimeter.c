@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 04:28:07 by melayoub          #+#    #+#             */
-/*   Updated: 2023/09/26 21:31:03 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/15 15:27:37 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	check_top_bottom(char **map)
 	{
 		if (map[0][i] == '\n')
 			break ;
+		while(is_whitesp_butnl(map[0][i]))
+			i++;
 		if (map[0][i] != '1')
 			ft_error("ERROR: Missing walls!");
 		i++;
@@ -33,6 +35,8 @@ void	check_top_bottom(char **map)
 	{
 		if (map[j][i] == '\n')
 			return ;
+		while(is_whitesp_butnl(map[j][i]))
+			i++;
 		if (map[j][i] != '1')
 			ft_error("ERROR: Missing walls!");
 		i++;
@@ -42,12 +46,16 @@ void	check_top_bottom(char **map)
 void	check_sides(char **map)
 {
 	int	j;
+	int i;
 
-	j = 1;
+	j = 0;
 	while (map[j])
 	{
-		if (map[j][0] != '1' || map[j][ft_strlen(map[j]) - 2] != '1')
-			ft_error("ERROR: Missing walls!");
+		i = 0;
+		while(is_whitesp_butnl(map[j][i]))
+			i++;
+		if (map[j][i] != '1' || map[j][ft_strlen(map[j]) - 2] != '1')
+			ft_error("ERROR: Missing walls44!");
 		j++;
 	}
 }
@@ -56,10 +64,12 @@ void	ft_line_check(char *lng, char *shrt)
 {
 	int	i;
 
-	i = ft_strlen(shrt);
+	i = ft_strlen(shrt) - 1;
 	while (lng[i])
 	{
-		if (lng[i] != '1' && lng[i] != '\n')
+		printf("lng[i]--> |%c|\n", lng[i]);
+		// if (lng[i] != '1' && lng[i] != '\n')
+		if (lng[i] == '0')
 			ft_error("ERROR: Unsealed perimeter");
 		i++;
 	}
@@ -79,6 +89,46 @@ void	check_extranous_spaces(char **map)
 				ft_line_check(map[j], map[j + 1]);
 			else
 				ft_line_check(map[j + 1], map[j]);
+		}
+		j++;
+	}
+}
+
+void	check_extranous_revsp(char **map)
+{
+	int j;
+	int i;
+	int x;
+	
+	j = 0;
+	i = 0;
+	while(map[j])
+	{
+		if (is_whitesp_butnl(map[j][0]))
+		{
+			x = 0;
+			while(is_whitesp_butnl(map[j][i]))
+				i++;
+			if (map[j - 1])
+			{
+				while(x < i - 1)
+				{
+					if (map[j - 1][x] == '0')
+						ft_error("TF1");
+					x++;
+				}
+			}
+			x = 0;
+			if (map[j + 1])
+			{
+				while(x < i - 1)
+				{
+					if (map[j + 1][x] == '0')
+						ft_error("TF2");
+					x++;
+				}
+			}
+			
 		}
 		j++;
 	}

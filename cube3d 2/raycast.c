@@ -565,6 +565,12 @@ void	cub(t_cube *main_game)
 			k = j;
 		i++;
 	}
+	int y = 0;
+	while(main_game->lmt->map[y])
+	{
+		printf("mp--> |%s|\n", main_game->lmt->map[y]);
+		y++;
+	}
 	main_game->x_p = (k - 1) * TILE_SIZE;
 	main_game->y_p = (i) * TILE_SIZE;
 

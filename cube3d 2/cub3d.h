@@ -157,6 +157,7 @@ void	check_extension(char *path);
 void	check_top_bottom(char **map);
 void	check_sides(char **map);
 void	check_extranous_spaces(char **map);
+void	check_extranous_revsp(char **map);
 int	foreign_material(char **map);
 void	player_pos_dir(char **map);
 void	check_components(char **map);
@@ -169,5 +170,6 @@ void	read_components(t_cube *content);
 void	maper(t_cube	*content, char	*av);
 // void	free_kolchi(t_cube *main_game);
 void check_dir(char **map, t_cube *content);
+int is_whitesp_butnl(char c);
 
 #endif 

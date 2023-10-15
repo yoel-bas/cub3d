@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 23:40:21 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/14 00:55:28 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/15 14:28:01 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ char *alloc_n_trim(char *line)
 	int		i;
 
 	i = 0;
-	while (is_white_space(line[i]))
-		i++;
+	// while (is_white_space(line[i]))
+	// 	i++;
 	if (!line[i])
 		return (ft_strdup("\n"));
 	start = i;

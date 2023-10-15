@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 23:56:26 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/14 01:07:03 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:48:40 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,22 @@ void	ft_fill_map(t_cube *content, int *j)
 		y++;
 	}
 	content->lmt->map[y] = NULL;
+	int x = 0;
+	printf("-----------------\n");
+	while(content->lmt->map[x])
+	{
+		int z = 0;
+		while(content->lmt->map[x][z])
+		{
+			if(content->lmt->map[x][z] && is_white_space(content->lmt->map[x][z]))
+				content->lmt->map[x][z] = '1';
+			z++;
+		}
+		printf("%s\n", content->lmt->map[x]);
+		x++;
+	}
+		printf("-----------------\n");
+
 }
 
 void	ft_is_clr(char *line, t_cube *cnt)

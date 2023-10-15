@@ -1,38 +1,34 @@
 NAME = cub3d
 HEADER = cub3d.h 
 
-SRC = ft_bzero.c \
-	  ft_calloc.c \
-	  ft_memset.c \
-	  map_init.c \
-	  ft_strchr.c\
+SRC =  map_init.c \
 	  map_init_helper.c \
-	  utils_map.c \
-	  utils_splt.c \
-	  utils.c \
-	  utils2.c \
+	  ./utils/utils_map.c \
+	  ./utils/utils2.c \
+	  ./utils/ft_split.c \
 	  map_components.c \
 	  map_perimeter.c\
 	  path_parse.c\
 	  clr_parse.c\
 	  get_next_line.c \
 	get_next_line_utils.c \
-	  ft_strjoin.c \
 	  cub3d.c \
 	  raycast.c \
-	  ft_bzero.c \
-	  ft_calloc.c \
-	  ft_memset.c \
-	  ft_split.c \
-	  ft_strchr.c \
-	  ft_strcmp.c \
-	  ft_strdup.c \
-	  ft_strlen.c \
-	  ft_substr.c \
 	  ft_wrong.c \
 	  get_next_line.c \
+	#  draw.c \
+	  ft_strcmp.c \
+	  ft_strchr.c \
+	  ft_memset.c \
+	  utils_splt.c \
 	  ft_strjoin.c \
-	  draw.c 
+	  ft_strlen.c \
+	  ft_substr.c \
+	  ft_calloc.c \
+	  ft_bzero.c \
+	  ft_strdup.c \
+	  ft_strjoin.c \
+	  
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
