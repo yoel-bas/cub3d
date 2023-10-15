@@ -290,18 +290,15 @@ void	cast_ray(t_cube *main_game, double angle, int *i)
 		ray_distance = vert_distance;
 	}
 	perpdistance = ray_distance * cos(angle - main_game->player->r_angle);
-			//printf("lsss %f\n", perpdistance);
-
-	if(perpdistance <= 0)
-		perpdistance = 4;
-	projection = (main_game->x_p / 2) / tan(main_game->ray->FOV_ANGLE / 2);
+	projection = (WIDTH / 2) / tan(main_game->ray->FOV_ANGLE / 2);
 	wallstrip = (TILE_SIZE / perpdistance) * projection;
-	wall_top = (main_game->y_p / 2) - (wallstrip / 2); 
+
+	wall_top = (HEIGHT / 2) - (wallstrip / 2); 
 	if(wall_top < 0)
 		wall_top = 0;
-	wall_bottom = (main_game->y_p / 2) + (wallstrip / 2); 
-	if(wall_bottom > main_game->y_p)
-		wall_bottom = main_game->y_p;
+	wall_bottom = (HEIGHT / 2) + (wallstrip / 2); 
+	if(wall_bottom > HEIGHT)
+		wall_bottom = HEIGHT;
 	int y = wall_top;
 
 	mlx_image_t *sight;
@@ -328,7 +325,7 @@ void	cast_ray(t_cube *main_game, double angle, int *i)
 		// texturs_x = (int)((main_game->ray->wall_horzx * sight->width) / TILE_SIZE) % sight->width;
 	while(y < wall_bottom)
 	{
-	 	int mm = y + ( wallstrip / 2) - (main_game->y_p / 2); 
+	 	int mm = y + ( wallstrip / 2) - (HEIGHT/ 2); 
         int y_texture = mm * ((double)sight->height / wallstrip);
 		// if (main_game->ray->face_up  && main_game->check_vert == 1)
 		// 	color = get_north_color(main_game, y_texture, texturs_x);
@@ -347,7 +344,7 @@ void	cast(t_cube *main_game)
 	int i = 0;
 	// double nor_ra= normalize(main_game->player->r_angle);
 	double ray_angle = main_game->player->r_angle - (main_game->ray->FOV_ANGLE / 2);
-	while(i < main_game->x_p)
+	while(i < WIDTH)
 	{
 		ray_angle = normalize(ray_angle);
 		main_game->ray_angle_image = ray_angle;
@@ -356,7 +353,7 @@ void	cast(t_cube *main_game)
 		main_game->ray->face_down = (ray_angle > 0 && ray_angle < M_PI);
 		main_game->ray->face_up = !(main_game->ray->face_down);
 		cast_ray(main_game, ray_angle, &i);
-		ray_angle += (main_game->ray->FOV_ANGLE / ((main_game->x_p)));
+		ray_angle += (main_game->ray->FOV_ANGLE / ((WIDTH)));
 		i++;
 	}
 
@@ -371,7 +368,7 @@ void	player_update(t_cube *main_game)
 		main_game->player->y += sin(main_game->player->r_angle) * main_game->player->steps;
 		main_game->player->x_r = main_game->player->x + cos(main_game->player->r_angle) * 40;
 		main_game->player->y_r = main_game->player->y + sin(main_game->player->r_angle) * 40;
-		if(is_wall(main_game, main_game->player->x, main_game->player->y))
+		if(is_wall(main_game, main_game->player->x, main_game->player->y) || between(main_game, old_x, old_y))
 		{
 			main_game->player->x = old_x;
 			main_game->player->y = old_y;
@@ -426,7 +423,7 @@ int ceiling_color(t_cube *main_game, int upper_half)
 	while(y < upper_half)
 	{
 		x = 0;
-		while(x < main_game->x_p)
+		while(x < WIDTH)
 		{
 			unsigned int color_cl = ft_pixel(ft_atoi(splt[0]) , ft_atoi(splt[1]), ft_atoi(splt[2]), 255);
 			mlx_put_pixel(main_game->image, x, y, color_cl);
@@ -453,10 +450,10 @@ void	floor_color(t_cube *main_game, int lower_half)
 
 	splt = ft_split(main_game->cl->fl, ',');
 	y = lower_half;
-	while(y < main_game->y_p)
+	while(y < HEIGHT)
 	{
 	x = 0;
-		while(x < main_game->x_p)
+		while(x < WIDTH)
 		{
 			unsigned int color_fl = ft_pixel(ft_atoi(splt[0]), ft_atoi(splt[1]), ft_atoi(splt[2]), 255);
 			// printf("%s\n", main_game->cl->fl);
@@ -481,7 +478,7 @@ void	ceiling_floor(t_cube *main_game)
 	// char	**splt_fl;
 
 	// splt_cl = ft_split(main_game->cl->cl, ',');
-	upper_half = main_game->y_p / 2;
+	upper_half = HEIGHT / 2;
 	lower_half = ceiling_color(main_game, upper_half);
 	// y = upper_half;
 	floor_color(main_game, lower_half);
@@ -533,7 +530,7 @@ void dd_callback(void *param)
     main_game->player->turn_direction = 0;
 	if(main_game->image)
 		mlx_delete_image(main_game->mlx, main_game->image);
-	main_game->image = mlx_new_image(main_game->mlx, (main_game->x_p), ( main_game->y_p ));
+	main_game->image = mlx_new_image(main_game->mlx, WIDTH, HEIGHT);
 	if(mlx_is_key_down(main_game->mlx, MLX_KEY_LEFT)) 
     	main_game->player->turn_direction = -1;
 	if(mlx_is_key_down(main_game->mlx, MLX_KEY_W))
@@ -578,8 +575,8 @@ void	cub(t_cube *main_game)
 	main_game->ray = malloc(sizeof(t_ray));
 	get_player_pos(main_game);
 	player_init(main_game);
-	main_game->mlx = mlx_init(main_game->x_p ,main_game->y_p , "cube", FALSE);
-	main_game->image = mlx_new_image(main_game->mlx,main_game->x_p , main_game->y_p);
+	main_game->mlx = mlx_init(WIDTH ,HEIGHT, "cube", FALSE);
+	main_game->image = mlx_new_image(main_game->mlx,WIDTH , HEIGHT);
 	mlx_put_pixel(main_game->image, 0, 0, ft_pixel(255, 172, 28, 255));
 	ft_upload_texture_img(main_game);
 	frame(main_game);	

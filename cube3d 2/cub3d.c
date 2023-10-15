@@ -6,8 +6,8 @@ void	ft_parser(t_cube *content)
 		ft_error("foreing material");
 	check_top_bottom(content->lmt->map);
 	check_sides(content->lmt->map);
-	// check_extranous_spaces(content->lmt->map);
-	check_extranous_revsp(content->lmt->map);
+	check_extranous_spaces(content->lmt->map);
+	// check_extranous_revsp(content->lmt->map);
 	check_dir(content->lmt->map, content);
 }
 

@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 04:28:07 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/15 15:27:37 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/15 20:10:34 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,28 +100,26 @@ void	check_extranous_revsp(char **map)
 	int i;
 	int x;
 	
-	j = 0;
-	i = 0;
+	j = 1;
 	while(map[j])
 	{
 		if (is_whitesp_butnl(map[j][0]))
 		{
 			x = 0;
+			i = 0;
 			while(is_whitesp_butnl(map[j][i]))
 				i++;
-			if (map[j - 1])
+			while(x < i)
 			{
-				while(x < i - 1)
-				{
-					if (map[j - 1][x] == '0')
-						ft_error("TF1");
-					x++;
-				}
+				if (map[j - 1][x] == '0')
+					ft_error("TF1");
+				x++;
 			}
+			puts("ok");	
 			x = 0;
 			if (map[j + 1])
 			{
-				while(x < i - 1)
+				while(x < i)
 				{
 					if (map[j + 1][x] == '0')
 						ft_error("TF2");

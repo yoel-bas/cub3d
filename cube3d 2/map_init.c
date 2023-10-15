@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 23:40:21 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/15 14:28:01 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/15 19:46:38 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char *alloc_n_trim(char *line)
 	int		start;
 	int		end;
 	int		i;
-
+	char *zbi;
 	i = 0;
 	// while (is_white_space(line[i]))
 	// 	i++;
@@ -25,9 +25,14 @@ char *alloc_n_trim(char *line)
 		return (ft_strdup("\n"));
 	start = i;
 	end = ft_strlen(line) - 1;
-	while (is_white_space(line[end]))
+	while (end >= 0 && is_white_space(line[end]))
 		end--;
-	return (ft_strjoin(ft_substr(line, start, (end + 1) - start), "\n"));
+	zbi = ft_strjoin(ft_substr(line, start, (end + 1) - start), "\n");
+	// printf("zbii: |%s|\n", zbi);
+	int x = 0;
+	while(zbi[x])
+		printf("z0b: |%c|\n", zbi[x++]);
+	return (zbi);
 	// if(!is_white_space(line[i]))
 	// 	ft_error("ERROR: incorrect dir syntax!");
 }

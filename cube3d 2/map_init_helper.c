@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 23:56:26 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/15 18:48:40 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/15 20:11:30 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,11 @@ void	ft_fill_map(t_cube *content, int *j)
 		content->lmt->map[y] = ft_strcpy(content->lmt->file[*j]);
         ft_empty_line(content->lmt->map[y]);
 		(*j)++;
+	printf(">>>> |%s|\n", content->lmt->map[y]);
 		y++;
 	}
 	content->lmt->map[y] = NULL;
+	check_extranous_revsp(content->lmt->map);
 	int x = 0;
 	printf("-----------------\n");
 	while(content->lmt->map[x])
