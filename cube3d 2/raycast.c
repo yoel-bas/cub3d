@@ -3,7 +3,7 @@ void	player_init(t_cube *main_game)
 {
 	main_game->player->turn_direction = 0;
 	main_game->player->walk_direction = 0;
-	main_game->player->speed = 6.00;
+	main_game->player->speed = 1.00;
 	main_game->player->r_speed = 2 * (M_PI / 180);
 	if(main_game->dir_flag == 1)
 		main_game->player->r_angle =  M_PI / 2;
@@ -40,7 +40,7 @@ unsigned int ft_pixel(unsigned int r, unsigned int g, unsigned int b, unsigned i
     return (r << 24 | g << 16 | b << 8 | a);
 }
 
-void	get_player_pos(t_cube *main_game)
+void		get_player_pos(t_cube *main_game)
 {
 	int y = 0;
 	int x = 0;
@@ -52,8 +52,8 @@ void	get_player_pos(t_cube *main_game)
 			if(main_game->lmt->map[y][x] == 'N' || main_game->lmt->map[y][x] == 'S'
 				|| main_game->lmt->map[y][x] == 'W' || main_game->lmt->map[y][x] == 'E')
 			{
-				main_game->player->x = x * TILE_SIZE;
-				main_game->player->y = y * TILE_SIZE;
+				main_game->player->x = (x * TILE_SIZE) + TILE_SIZE / 2;
+				main_game->player->y = (y * TILE_SIZE) + TILE_SIZE / 2;
 			}
 			x++;
 		}
@@ -71,7 +71,6 @@ int		is_wall(t_cube *main_game, double x1, double y1)
     int y = y1 / TILE_SIZE;
 	if(x < 0  && x  >= (main_game->x_p) && y < 0  && y >= (main_game->y_p) )
 		return(1);
-
 	if(main_game->lmt->map[y][x] && main_game->lmt->map[y][x] == '1')
 		return(1);
 	return(0);
@@ -153,11 +152,9 @@ void	vertical_cast(t_cube *main_game,double angle)
 		double to_checkx = check_x;
 		double to_checky = check_y;
 		if(main_game->ray->face_left)
-			to_checkx -= 0.000001;
+			to_checkx -= 1;
 		if(is_wall(main_game, to_checkx, to_checky))
 		{
-			// main_game->ray->wall_vertx = check_x;
-			// main_game->ray->wall_verty = check_y;
 			break;
 		}
 		check_x += x_step;
@@ -195,7 +192,7 @@ void	horizontal_cast(t_cube *main_game,double angle)
 				double to_checkx = check_x;
 		double to_checky = check_y;
 		if(main_game->ray->face_up)
-			to_checky -= 0.000001;
+			to_checky -= 1;
 		if(is_wall(main_game, to_checkx, to_checky))
 		{
 			// main_game->ray->wall_horzx = check_x;
@@ -252,16 +249,6 @@ unsigned int get_color(mlx_image_t *sight, unsigned int y_texture, unsigned int 
 
 void	cast_ray(t_cube *main_game, double angle, int *i)
 {
-	// printf("angle  : %f \n", angle );
-	// printf("FOV : %f\n", (main_game->ray->FOV_ANGLE ));
-	// if(main_game->ray->face_up)
-	// 	puts("up");
-	// if(!main_game->ray->face_up)
-	// 	puts("down");
-	// if(main_game->ray->face_right)
-	// 	puts("right");
-	// if(!main_game->ray->face_right)
-	// 	puts("left");
 	horizontal_cast(main_game,angle);
 	vertical_cast(main_game,angle);
 	double ray_distance;
@@ -278,19 +265,20 @@ void	cast_ray(t_cube *main_game, double angle, int *i)
 	main_game->check_vert = 0;
 	if(horz_distance < vert_distance)
 	{	
-		hitx = main_game->ray->wall_horzx;
-		hity = main_game->ray->wall_horzy;
-		ray_distance = horz_distance;
+		hitx = main_game->ray->wall_horzx ;
+		hity = main_game->ray->wall_horzy ;
+		ray_distance = horz_distance ;
 	}
 	else
 	{
 		main_game->check_vert = 1;
 		hitx = main_game->ray->wall_vertx;
 		hity = main_game->ray->wall_verty;
-		ray_distance = vert_distance;
+		ray_distance = vert_distance ;
 	}
 	perpdistance = ray_distance * cos(angle - main_game->player->r_angle);
 	projection = (WIDTH / 2) / tan(main_game->ray->FOV_ANGLE / 2);
+
 	wallstrip = (TILE_SIZE / perpdistance) * projection;
 
 	wall_top = (HEIGHT / 2) - (wallstrip / 2); 
@@ -357,6 +345,14 @@ void	cast(t_cube *main_game)
 		i++;
 	}
 
+}
+int	between(t_cube *main_game, int x, int y)
+{
+		x = x / 64;
+		y = y / 64;
+		if(main_game->lmt->map[y][(int)main_game->player->x / TILE_SIZE] == '1' && main_game->lmt->map[(int)main_game->player->y / TILE_SIZE][x] == '1')
+		return(1);
+		return(0);
 }
 void	player_update(t_cube *main_game)
 {
@@ -510,12 +506,13 @@ void	frame(void * main)
 //     	main_game->player->turn_direction = 1;
 //     frame(main_game);
 // }
+
 void	move_side(t_cube *main_game, int side)
 {
-	int x = main_game->player->x;
-	int y = main_game->player->y;
-	x += cos(main_game->player->r_angle + (M_PI / 2)) * side * main_game->player->speed ;
-	y += sin(main_game->player->r_angle + (M_PI / 2)) * side * main_game->player->speed ;
+	double x = main_game->player->x;
+	double y = main_game->player->y;
+	x += cos(main_game->player->r_angle + (M_PI / 2)) * side * main_game->player->speed;
+	y += sin(main_game->player->r_angle + (M_PI / 2)) * side * main_game->player->speed;
 	if(!is_wall(main_game, x, y))
 	{
 		main_game->player->x = x;
@@ -530,7 +527,7 @@ void dd_callback(void *param)
     main_game->player->turn_direction = 0;
 	if(main_game->image)
 		mlx_delete_image(main_game->mlx, main_game->image);
-	main_game->image = mlx_new_image(main_game->mlx, WIDTH, HEIGHT);
+	main_game->image = mlx_new_image(main_game->mlx, (WIDTH), ( HEIGHT));
 	if(mlx_is_key_down(main_game->mlx, MLX_KEY_LEFT)) 
     	main_game->player->turn_direction = -1;
 	if(mlx_is_key_down(main_game->mlx, MLX_KEY_W))
@@ -547,7 +544,6 @@ void dd_callback(void *param)
 		exit(1);
 	frame(main_game);
 }
-
 void	cub(t_cube *main_game)
 {
 	int i = 0;
@@ -562,12 +558,7 @@ void	cub(t_cube *main_game)
 			k = j;
 		i++;
 	}
-	int y = 0;
-	while(main_game->lmt->map[y])
-	{
-		printf("mp--> |%s|\n", main_game->lmt->map[y]);
-		y++;
-	}
+
 	main_game->x_p = (k - 1) * TILE_SIZE;
 	main_game->y_p = (i) * TILE_SIZE;
 
@@ -577,9 +568,9 @@ void	cub(t_cube *main_game)
 	player_init(main_game);
 	main_game->mlx = mlx_init(WIDTH ,HEIGHT, "cube", FALSE);
 	main_game->image = mlx_new_image(main_game->mlx,WIDTH , HEIGHT);
-	mlx_put_pixel(main_game->image, 0, 0, ft_pixel(255, 172, 28, 255));
 	ft_upload_texture_img(main_game);
 	frame(main_game);	
+	
 	mlx_loop_hook(main_game->mlx, dd_callback, main_game);
 	mlx_loop(main_game->mlx);
 }

@@ -61,13 +61,11 @@ void	ft_fill_map(t_cube *content, int *j)
 		content->lmt->map[y] = ft_strcpy(content->lmt->file[*j]);
         ft_empty_line(content->lmt->map[y]);
 		(*j)++;
-	printf(">>>> |%s|\n", content->lmt->map[y]);
 		y++;
 	}
 	content->lmt->map[y] = NULL;
 	check_extranous_revsp(content->lmt->map);
 	int x = 0;
-	printf("-----------------\n");
 	while(content->lmt->map[x])
 	{
 		int z = 0;
@@ -77,10 +75,8 @@ void	ft_fill_map(t_cube *content, int *j)
 				content->lmt->map[x][z] = '1';
 			z++;
 		}
-		printf("%s\n", content->lmt->map[x]);
 		x++;
 	}
-		printf("-----------------\n");
 
 }
 

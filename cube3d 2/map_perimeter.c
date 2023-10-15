@@ -67,7 +67,6 @@ void	ft_line_check(char *lng, char *shrt)
 	i = ft_strlen(shrt) - 1;
 	while (lng[i])
 	{
-		printf("lng[i]--> |%c|\n", lng[i]);
 		// if (lng[i] != '1' && lng[i] != '\n')
 		if (lng[i] == '0')
 			ft_error("ERROR: Unsealed perimeter");

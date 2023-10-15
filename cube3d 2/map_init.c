@@ -29,9 +29,6 @@ char *alloc_n_trim(char *line)
 		end--;
 	zbi = ft_strjoin(ft_substr(line, start, (end + 1) - start), "\n");
 	// printf("zbii: |%s|\n", zbi);
-	int x = 0;
-	while(zbi[x])
-		printf("z0b: |%c|\n", zbi[x++]);
 	return (zbi);
 	// if(!is_white_space(line[i]))
 	// 	ft_error("ERROR: incorrect dir syntax!");

@@ -31,7 +31,7 @@ SRC =  map_init.c \
 	  
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror 
 RM = rm -rf
 
 OBJ = $(SRC:.c=.o)

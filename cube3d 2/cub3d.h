@@ -2,8 +2,8 @@
 # define CUB3D_H
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 3
-#  define HEIGHT 900
-#  define WIDTH 1600
+#  define HEIGHT 720
+#  define WIDTH 1200
 #  define TILE_SIZE 64
 #  define SCALE 0.2
 # endif
@@ -64,6 +64,7 @@ typedef struct p
 	float r_speed;
 	float flg;
 	float steps;
+	int middle;
 }		t_player;
 typedef struct element
 {
