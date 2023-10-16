@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 23:56:26 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 14:53:09 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/16 19:09:45 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,36 +21,44 @@ void	space_skipper(char *str)
 		i++;
 }
 
-void	read_components(t_cube *content)
+int	dir_op(char x)
 {
-	int j;
+	if (x == 'N' || x == 'S'|| x == 'E' || x == 'W')
+	 	return (1);
+	else
+		return (0);
+}
+
+
+
+void	read_components(t_cube *cont)
+{
+	int	j;
 	int	i;
 
-	j = 0;
-	while(content->lmt->file[j])
+	j = -1;
+	while (cont->lmt->file[++j])
 	{
-		i = 0;
-		while(is_white_space(content->lmt->file[j][i]))
+		i = -1;
+		while (is_white_space(cont->lmt->file[j][i]))
 			i++;
-		if (content->lmt->file[j][i] == 'N' || content->lmt->file[j][i] == 'S'
-		|| content->lmt->file[j][i] == 'E' || content->lmt->file[j][i] == 'W')
-			ft_is_dir(content->lmt->file[j], content);
-		else if (content->lmt->file[j][i] == 'F' || content->lmt->file[j][i] == 'C')
-			ft_is_clr(content->lmt->file[j], content);
-		else if (content->lmt->file[j][0] == '\n')
+		if (cont->lmt->file[j][i] && dir_op(cont->lmt->file[j][i]))
+			ft_is_dir(cont->lmt->file[j], cont);
+		else if (cont->lmt->file[j][i] == 'F' || cont->lmt->file[j][i] == 'C')
+			ft_is_clr(cont->lmt->file[j], cont);
+		else if (cont->lmt->file[j][0] == '\n')
 		{
 			j++;
 			continue ;
 		}
 		else
 		{
-			if (content->lmt->file[j] && fullfilled(content))
-				return(ft_fill_map(content, &j));
+			if (cont->lmt->file[j] && fullfilled(cont))
+				return (ft_fill_map(cont, &j));
 			else
 				ft_error("Error: components order");
 		}
-		j++;
 	}
-	if (!content->lmt->file[j])
+	if (!cont->lmt->file[j])
 		ft_error("empty map!");
 }

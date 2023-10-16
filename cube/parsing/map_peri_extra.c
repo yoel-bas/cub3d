@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 02:07:07 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 13:36:51 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/16 18:52:33 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ void	check_inner_extranous(char **map)
 		i = 0;
 		while (map[j][i])
 		{
-			if (map[j - 1] && map[j + 1] && map[j][i] == '0')
+			if (map[j - 1] && map[j + 1] 
+				&& (map[j][i] == '0' || map[j][i] == 'N'
+				|| map[j][i] == 'S' || map[j][i] == 'W' || map[j][i] == 'E'))
 			{
 				if ((map[j - 1][i] && is_white_space(map[j - 1][i]))
 				|| (map[j - 1][i] && is_white_space(map[j + 1][i])))

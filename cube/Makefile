@@ -21,21 +21,6 @@ SRC =  ./init/map_init.c \
 	./raycast/drawer.c \
 	./raycast/get_colors.c \
 	cub3d.c \
-	#  draw.c \
-	./raycast/player.c \
-	ft_wrong.c \
-	  ft_strcmp.c \
-	  ft_strchr.c \
-	  ft_memset.c \
-	  utils_splt.c \
-	  ft_strjoin.c \
-	  ft_strlen.c \
-	  ft_substr.c \
-	  ft_calloc.c \
-	  ft_bzero.c \
-	  ft_strdup.c \
-	  ft_strjoin.c \
-	  
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror 
