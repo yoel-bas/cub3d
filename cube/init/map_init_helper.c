@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 23:56:26 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 19:09:45 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/16 19:25:36 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void	space_skipper(char *str)
 	int	i;
 
 	i = 0;
-	while(is_white_space(str[i]))
+	while (is_white_space(str[i]))
 		i++;
 }
 
 int	dir_op(char x)
 {
 	if (x == 'N' || x == 'S'|| x == 'E' || x == 'W')
-	 	return (1);
+		return (1);
 	else
 		return (0);
 }
@@ -36,10 +36,10 @@ void	read_components(t_cube *cont)
 	int	j;
 	int	i;
 
-	j = -1;
-	while (cont->lmt->file[++j])
+	j = 0;
+	while (cont->lmt->file[j])
 	{
-		i = -1;
+		i = 0;
 		while (is_white_space(cont->lmt->file[j][i]))
 			i++;
 		if (cont->lmt->file[j][i] && dir_op(cont->lmt->file[j][i]))
@@ -58,6 +58,7 @@ void	read_components(t_cube *cont)
 			else
 				ft_error("Error: components order");
 		}
+		j++;
 	}
 	if (!cont->lmt->file[j])
 		ft_error("empty map!");

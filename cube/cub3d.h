@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:58:43 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 17:10:35 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/16 19:26:47 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,5 +187,7 @@ void			reycast(t_cube *main_game, int fd);
 void			draw_ground(t_cube *main_game, int x_p, int y_p);
 void			draw_walls(t_cube *main_game, int x_p, int y_p);
 void			cub(t_cube *main_game);
+unsigned int	ceiling_color(t_cube *main_game, int upper_half);
+void			floor_color(t_cube *main_game, int lower_half);
 
 #endif 
