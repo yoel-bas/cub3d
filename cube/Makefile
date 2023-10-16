@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = cub3D
 HEADER = cub3d.h 
 
 SRC =  ./init/map_init.c \
@@ -19,6 +19,8 @@ SRC =  ./init/map_init.c \
 	./raycast/init_textures.c \
 	./raycast/raycast.c \
 	./raycast/drawer.c \
+	./raycast/player.c \
+	./raycast/moves.c \
 	./raycast/get_colors.c \
 	cub3d.c \
 

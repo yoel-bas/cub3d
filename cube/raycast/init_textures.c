@@ -29,3 +29,38 @@ void	ft_upload_texture_img(t_cube *content)
 		|| !content->m_east || !content->m_west)
 		ft_error("ERROR: texture loading issue!");
 }
+
+void	get_border(t_cube *main_game)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = -1;
+	k = 0;
+	while (main_game->lmt->map[++i])
+	{
+		j = -1;
+		while (main_game->lmt->map[i][j])
+			j++;
+		if (j > k)
+			k = j;
+	}
+	main_game->x_p = (k - 1) * TILE_SIZE;
+	main_game->y_p = (i) * TILE_SIZE;
+}
+
+double	distance(double x, double y, double x1, double y1)
+{
+	return (sqrt(pow((x1 - x), 2) + pow((y1 - y), 2)));
+}
+
+void	texture(t_cube *main_game, mlx_image_t *sight)
+{
+	if (main_game->check_vert)
+		main_game->texturs_x = (int)(main_game->ray->wall_verty
+				* ((float)sight->width / TILE_SIZE)) % sight->width;
+	else
+		main_game->texturs_x = (int)(main_game->ray->wall_horzx
+				* ((float)sight->width / TILE_SIZE)) % sight->width;
+}

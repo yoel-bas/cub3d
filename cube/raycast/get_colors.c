@@ -75,7 +75,7 @@ void	floor_color(t_cube *main_game, int lower_half)
 		while (x < WIDTH)
 		{
 			color_fl = ft_pixel(ft_atoi(splt[0]),
-					ft_atoi(splt[1]) , ft_atoi(splt[2]), 255);
+					ft_atoi(splt[1]), ft_atoi(splt[2]), 255);
 			mlx_put_pixel(main_game->image, x, y, color_fl);
 			x++;
 		}

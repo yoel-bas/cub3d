@@ -12,47 +12,97 @@
 
 #include "../cub3d.h"
 
-void	draw_w(t_cube *main_game, int *x, int* y, int color)
+double	normalize(double angle)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	i = *y * TILE_SIZE; 
-	while (i < (TILE_SIZE + (*y * TILE_SIZE)))
-	{
-		j = *x * TILE_SIZE; 
-		while (j < (TILE_SIZE + (*x * TILE_SIZE)))
-		{
-			mlx_put_pixel(main_game->image, j  * SCALE,i  * SCALE, color);
-			j++;
-		}
-		i++;
-	}
+	while (angle < 0)
+		angle += 2 * M_PI;
+	while (angle >= 2 * M_PI)
+		angle -= 2 * M_PI;
+	return (angle);
 }
 
-void	draw_map(t_cube *main_game)
+void	calcul_vertical(t_cube *main_game, double angle)
 {
-	int	x;
-	int	y;
-	int	i;
-	int	j;
+	main_game->x_inter = floor(main_game->player->x / TILE_SIZE) * TILE_SIZE;
+	if (main_game->ray->face_right)
+		main_game->x_inter += TILE_SIZE;
+	main_game->y_inter = main_game->player->y 
+		+ ((main_game->x_inter - main_game->player->x) * tan(angle));
+	main_game->x_step = TILE_SIZE;
+	if (main_game->ray->face_left)
+		main_game->x_step *= -1;
+	main_game->y_step = main_game->x_step * tan(angle);
+	if (main_game->ray->face_up && main_game->y_step > 0)
+		main_game->y_step *= -1;
+	if (main_game->ray->face_down && main_game->y_step < 0)
+		main_game->y_step *= -1;
+}
 
-	x = 0;
-	y = 0;
-	i = 0;
-	j = 0;
-	while (main_game->lmt->map[y])
+void	vertical_cast(t_cube *main_game, double angle)
+{
+	double	check_x;
+	double	check_y;
+	double	to_checkx;
+	double	to_checky;
+
+	calcul_vertical(main_game, angle);
+	check_x = main_game->x_inter;
+	check_y = main_game->y_inter;
+	while (check_x >= 0 && check_x <= (main_game->x_p) 
+		&& check_y >= 0 && check_y <= main_game->y_p)
 	{
-		x = 0;
-		while (main_game->lmt->map[y][x])
-		{
-			if (main_game->lmt->map[y][x] == '1')
-				draw_w(main_game, &x,&y, 0xFF0000);
-			x++;
-		}
-		y++;
-
+		to_checkx = check_x;
+		to_checky = check_y;
+		if (main_game->ray->face_left)
+			to_checkx -= 1;
+		if (is_wall(main_game, to_checkx, to_checky))
+			break ;
+		check_x += main_game->x_step;
+		check_y += main_game->y_step;
 	}
+	main_game->ray->wall_vertx = check_x;
+	main_game->ray->wall_verty = check_y;
+}
+
+void	calcul_horizontal(t_cube *main_game, double angle)
+{
+	main_game->y_inter = floor(main_game->player->y / TILE_SIZE) * TILE_SIZE;
+	if (main_game->ray->face_down)
+		main_game->y_inter += TILE_SIZE;
+	main_game->x_inter = main_game->player->x 
+		+ ((main_game->y_inter - main_game->player->y) / tan(angle));
+	main_game->y_step = TILE_SIZE;
+	if (main_game->ray->face_up)
+		main_game->y_step *= -1;
+	main_game->x_step = main_game->y_step / tan(angle);
+	if (main_game->ray->face_left && main_game->x_step > 0)
+		main_game->x_step *= -1;
+	if (main_game->ray->face_right && main_game->x_step < 0)
+		main_game->x_step *= -1;
+}
+
+void	horizontal_cast(t_cube *main_game, double angle)
+{
+	double	check_x; 
+	double	check_y;
+	double	to_checkx;
+	double	to_checky;
+
+	calcul_horizontal(main_game, angle);
+	check_x = main_game->x_inter;
+	check_y = main_game->y_inter;
+	while (check_x >= 0 && check_x <= (main_game->x_p) 
+		&& check_y >= 0 && check_y <= main_game->y_p)
+	{
+		to_checkx = check_x;
+		to_checky = check_y;
+		if (main_game->ray->face_up)
+			to_checky -= 1;
+		if (is_wall(main_game, to_checkx, to_checky))
+			break ;
+		check_x += main_game->x_step;
+		check_y += main_game->y_step;
+	}
+	main_game->ray->wall_horzx = check_x;
+	main_game->ray->wall_horzy = check_y;
 }
