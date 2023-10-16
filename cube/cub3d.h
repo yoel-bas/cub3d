@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:58:43 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 19:26:47 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/16 23:00:49 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,28 +126,28 @@ typedef struct element
 	int					dir_flag;
 	int					done_flag;
 	double				step;
-	int	texturs_x;
-		int				y_texture;
-			unsigned int	color;
-	int				mm;
-	double ray_distance;
-	double perpdistance;
-	double projection;
-	double wallstrip;
-	int wall_top;
-	int wall_bottom;
-	double x_step;
-	double y_step;
-	double x_inter;
-	double y_inter;
-	double check_x;
-	double check_y;
-	double to_checkx;
-	double to_checky;
+	int					texturs_x;
+	int					y_texture;
+	unsigned int		color;
+	int					mm;
+	double				ray_distance;
+	double				perpdistance;
+	double				projection;
+	double				wallstrip;
+	int					wall_top;
+	int					wall_bottom;
+	double				x_step;
+	double				y_step;
+	double				x_inter;
+	double				y_inter;
+	double				check_x;
+	double				check_y;
+	double				to_checkx;
+	double				to_checky;
 }				t_cube;
 
 void			ft_error(char *str);
-void	texture(t_cube *main_game, mlx_image_t *sight);
+void			texture(t_cube *main_game, mlx_image_t *sight);
 char			*get_next_line(int fd);
 int				ft_isalpha(int c);
 int				is_white_space(char x);
@@ -183,12 +183,12 @@ void			ft_fill_map(t_cube *content, int *j);
 void			player_pos_dir(char **map);
 void			check_components(char **map);
 int				fullfilled(t_cube *cnt);
-double	distance(double x, double y, double x1, double y1);
-void	cast(t_cube *main_game);
-int	between(t_cube *main_game, int x, int y);
-void	get_border(t_cube *main_game);
+double			distance(double x, double y, double x1, double y1);
+void			cast(t_cube *main_game);
+int				between(t_cube *main_game, int x, int y);
+void			get_border(t_cube *main_game);
 int				line_count(char **dbl, int *j);
-void	ceiling_floor(t_cube *main_game);
+void			ceiling_floor(t_cube *main_game);
 void			clr_parse(char *str);
 void			read_components(t_cube *content);
 void			maper(t_cube	*content, char	*av);
@@ -196,18 +196,18 @@ void			check_dir(char **map, t_cube *content);
 
 void			ft_upload_texture_img(t_cube *content);
 void			player_init(t_cube *main_game);
-unsigned int	ft_pixel(unsigned int r, unsigned int g
-					, unsigned int b, unsigned int a);
+unsigned int	ft_pixel(unsigned int r, unsigned int g,
+					unsigned int b, unsigned int a);
 unsigned int	get_color(mlx_image_t *sight,
 					unsigned int y_texture, unsigned int x_texture);
 void			ceiling_floor(t_cube *main_game);
 void			draw_map(t_cube *main_game);
-void	player_init(t_cube *main_game);
+void			player_init(t_cube *main_game);
 void			player_update(t_cube *mg);
-void	get_player_pos(t_cube *game);
+void			get_player_pos(t_cube *game);
 void			player(t_cube *game);
-void	player_update(t_cube *mg);
-void	frame(void * main);
+void			player_update(t_cube *mg);
+void			frame(void *main);
 void			get_player_pos(t_cube *game);
 void			player_init(t_cube *main_game);
 void			reycast(t_cube *main_game, int fd);
@@ -216,10 +216,10 @@ void			draw_walls(t_cube *main_game, int x_p, int y_p);
 void			cub(t_cube *main_game);
 unsigned int	ceiling_color(t_cube *main_game, int upper_half);
 void			floor_color(t_cube *main_game, int lower_half);
-double	normalize(double angle);
-int	is_wall(t_cube *main_game, double x1, double y1);
-void	calcul_vertical(t_cube *main_game, double angle);
-void	vertical_cast(t_cube *main_game,double angle);
-void	calcul_horizontal(t_cube *main_game, double angle);
-void	horizontal_cast(t_cube *main_game,double angle);
-#endif 
+double			normalize(double angle);
+int				is_wall(t_cube *main_game, double x1, double y1);
+void			calcul_vertical(t_cube *main_game, double angle);
+void			vertical_cast(t_cube *main_game, double angle);
+void			calcul_horizontal(t_cube *main_game, double angle);
+void			horizontal_cast(t_cube *main_game, double angle);
+#endif
