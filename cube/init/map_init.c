@@ -6,13 +6,13 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 23:40:21 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 03:07:33 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/16 14:09:45 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
-char *alloc_n_trim(char *line)
+char	*alloc_n_trim(char *line)
 {
 	int		start;
 	int		end;
@@ -28,32 +28,34 @@ char *alloc_n_trim(char *line)
 	return (ft_strjoin(ft_substr(line, start, (end + 1) - start), "\n"));
 }
 
-int		line_counter(char *av)
+int	line_counter(char *av)
 {
-	int fd;
-	int count;
-	char *line;
+	int		fd;
+	int		count;
+	char	*line;
 
 	count = 0;
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
 		ft_error("ERROR: map_file not found!");
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		free(line);
+		line = get_next_line(fd);
 		count++;
 	}
 	return (count);
 }
 
-
 void	maper(t_cube	*content, char	*av)
 {
 	char	*line;
 	int		fd;
-	char	*res = 0;
-	int		i = 0;
+	char	*res;
+	int		i;
 
+	i = 0;
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
 		ft_error("ERROR: map_file not found!");

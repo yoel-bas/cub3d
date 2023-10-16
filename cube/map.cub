@@ -1,7 +1,7 @@
-  NO text ures/berlin.png
-SO text ures/wall.png
-EA text ures/ussr.png
-WE text ures/us.png
+  NO textures/berlin.png
+SO textures/wall.png
+EA textures/ussr.png
+WE textures/us.png
 
 
 
@@ -10,6 +10,8 @@ WE text ures/us.png
 C 5,6,44
 
 
-1111111
-1N00001
-1111111
+11111111111111111111111
+1N0000111111111111111111111
+111000000000000000011101101
+   110000000000011111111111
+111111111111111111111111

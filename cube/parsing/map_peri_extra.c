@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 02:07:07 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 02:57:55 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/16 13:36:51 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_line_check(char *lng, char *shrt)
 	while (lng[i])
 	{
 		if (lng[i] != '1')
-			ft_error("ERROR: Unsealed perimeter (west_side)");
+			ft_error("ERROR: Unsealed perimeter (east_side)");
 		i++;
 	}
 	return ;
@@ -44,21 +44,21 @@ void	check_extranous_spaces(char **map)
 	}
 }
 
-void check_inner_extranous(char **map)
+void	check_inner_extranous(char **map)
 {
-	int j;
-	int i;
-	
+	int	j;
+	int	i;
+
 	j = 0;
-	while(map[j])
+	while (map[j])
 	{
 		i = 0;
-		while(map[j][i])
+		while (map[j][i])
 		{
-			if(map[j - 1] && map[j + 1] && map[j][i] == '0' && (ft_strlen(map[j]) == ft_strlen(map[j - 1])
-			&& ft_strlen(map[j]) == ft_strlen(map[j + 1])))
+			if (map[j - 1] && map[j + 1] && map[j][i] == '0')
 			{
-				if (is_white_space(map[j - 1][i]) || is_white_space(map[j + 1][i]))
+				if ((map[j - 1][i] && is_white_space(map[j - 1][i]))
+				|| (map[j - 1][i] && is_white_space(map[j + 1][i])))
 					ft_error("ERROR: Unsealed perimeter (mid_map)");
 			}
 			i++;
@@ -67,39 +67,42 @@ void check_inner_extranous(char **map)
 	}
 }
 
+void	norm_extranous(char **map, int j, int x, int i)
+{
+	while (is_whitesp_butnl(map[j][i]))
+		i++;
+	while (x < i)
+	{
+		if (map[j - 1][x] != '1')
+			ft_error("ERROR: Unsealed perimeter (west_side)");
+		x++;
+	}
+	x = 0;
+	if (map[j + 1])
+	{
+		while (x < i)
+		{
+			if (map[j + 1][x] != '1')
+				ft_error("ERROR: Unsealed perimeter (west_side)");
+			x++;
+		}
+	}
+}
+
 void	check_extranous_revsp(char **map)
 {
-	int j;
-	int i;
-	int x;
-	
+	int	j;
+	int	i;
+	int	x;
+
 	j = 1;
-	while(map[j])
+	while (map[j])
 	{
 		if (is_whitesp_butnl(map[j][0]))
 		{
 			x = 0;
 			i = 0;
-			while(is_whitesp_butnl(map[j][i]))
-				i++;
-			while(x < i)
-			{
-				if (map[j - 1][x] != '1')
-					ft_error("ERROR: Unsealed perimeter (east_side)");
-				x++;
-			}
-			puts("ok");	
-			x = 0;
-			if (map[j + 1])
-			{
-				while(x < i)
-				{
-					if (map[j + 1][x] != '1')
-						ft_error("ERROR: Unsealed perimeter (east_side)");
-					x++;
-				}
-			}
-			
+			norm_extranous(map, j, x, i);
 		}
 		j++;
 	}

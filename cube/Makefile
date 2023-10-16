@@ -1,8 +1,11 @@
 NAME = cub3d
 HEADER = cub3d.h 
 
-SRC =  map_init.c \
-	map_init_helper.c \
+SRC =  ./init/map_init.c \
+	./init/map_init_helper.c \
+	./init/clrdir_filler.c \
+	./init/map_filler.c \
+	./utils/utils.c \
 	./utils/utils_map.c \
 	./utils/utils2.c \
 	./utils/ft_split.c \
@@ -13,9 +16,13 @@ SRC =  map_init.c \
 	./parsing/map_peri_extra.c \
 	./parsing/map_components.c \
 	./parsing/clr_parse.c\
+	./raycast/init_textures.c \
+	./raycast/raycast.c \
+	./raycast/drawer.c \
+	./raycast/get_colors.c \
 	cub3d.c \
-	raycast.c \
 	#  draw.c \
+	./raycast/player.c \
 	ft_wrong.c \
 	  ft_strcmp.c \
 	  ft_strchr.c \

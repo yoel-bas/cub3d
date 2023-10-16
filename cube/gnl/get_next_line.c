@@ -6,11 +6,11 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:29:00 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/14 00:55:50 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/16 13:13:47 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"get_next_line.h"
+#include "get_next_line.h"
 
 char	*get_next_line(int fd)
 {

@@ -6,18 +6,11 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:38:32 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 03:57:07 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/16 13:54:52 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void	ft_error(char *str)
-{
-	write (2, str, ft_strlen(str));
-	write (2, "\n", 1);
-	exit (1);
-}
 
 int	ft_strncmp(char *s1, char *s2, size_t n)
 {
@@ -62,15 +55,16 @@ void	*ft_calloc(size_t count, size_t size)
 	return (ptr);
 }
 
-char *ft_strcpy(char *src) 
+char	*ft_strcpy(char *src)
 {
-	int i;
-    size_t len;
+	int		i;
+	size_t	len;
+	char	*dest;
 
 	len = strlen(src);
 	i = 0;
-    char *dest = (char *)malloc((len + 1) * sizeof(char));
-    if (!dest)
+	dest = (char *)malloc((len + 1) * sizeof(char));
+	if (!dest)
 		ft_error("Error: allocation error!");
 	while (src[i])
 	{
@@ -78,7 +72,7 @@ char *ft_strcpy(char *src)
 		i++;
 	}
 	dest[i] = '\0';
-    return (dest);
+	return (dest);
 }
 
 int	ft_atoi(const char *str)
@@ -91,11 +85,11 @@ int	ft_atoi(const char *str)
 	res = 0;
 	i = 0;
 	while ((str[i] >= 9 && str[i] <= 13) || (str[i] == 32))
-			i++;
+		i++;
 	if (str[i] == '+')
 		i++;
 	else if (str[i] == '-')
-	{	
+	{
 		sign *= -1;
 		i++;
 	}
