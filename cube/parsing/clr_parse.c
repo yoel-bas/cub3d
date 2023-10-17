@@ -6,19 +6,11 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:16:20 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 13:20:23 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:28:12 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int	ft_is_digit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	else
-		return (0);
-}
 
 void	free_dbl(char **str)
 {
@@ -30,12 +22,30 @@ void	free_dbl(char **str)
 	free(str);
 }
 
+void	count_commas(char *str)
+{
+	int	i;
+	int	c_count;
+
+	c_count = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == ',')
+			c_count++;
+		i++;
+	}
+	if (c_count != 2)
+		ft_error("ERROR: incorrect RGB format");
+}
+
 void	clr_parse(char *str)
 {
 	char	**splt;
 	int		j;
 	int		i;
 
+	count_commas(str);
 	splt = ft_split(str, ',');
 	if (!splt[2] || splt[3])
 		ft_error("ERROR: incorrect RGB format");

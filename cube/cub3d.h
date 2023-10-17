@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:58:43 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 23:00:49 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:24:19 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ typedef struct element
 void			ft_error(char *str);
 void			texture(t_cube *main_game, mlx_image_t *sight);
 char			*get_next_line(int fd);
+int				ft_is_digit(int c);
 int				ft_isalpha(int c);
 int				is_white_space(char x);
 int				is_whitesp_butnl(char c);

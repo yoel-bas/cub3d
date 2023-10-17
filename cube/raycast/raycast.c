@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:25:21 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 17:12:13 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:58:57 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	cast_ray(t_cube *main_game, double angle, int *i)
 			main_game->ray->wall_vertx, main_game->ray->wall_verty);
 	calc(main_game, horz_distance, vert_distance, angle);
 	sight = sight_face(main_game);
-	texture(main_game, sight);
+	texture(main_game, sight);	
 	while (main_game->wall_top < main_game->wall_bottom)
 	{
 		main_game->mm = main_game->wall_top 

@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:06:09 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 17:11:55 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/17 12:02:11 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	player_init(t_cube *main_game)
 {
 	main_game->player->turn_direction = 0;
 	main_game->player->walk_direction = 0;
-	main_game->player->speed = 5.00;
+	main_game->player->speed = 7.00;
 	main_game->player->r_speed = 2 * (M_PI / 180);
 	if (main_game->dir_flag == 1)
 		main_game->player->r_angle = M_PI / 2;

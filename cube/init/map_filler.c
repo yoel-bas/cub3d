@@ -6,11 +6,21 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:45:16 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 14:54:48 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:40:48 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int	line_count(char	**dbl, int *j)
+{
+	int	x;
+
+	x = (*j);
+	while (dbl[x])
+		(x)++;
+	return (x);
+}
 
 void	ft_empty_line(char *line)
 {

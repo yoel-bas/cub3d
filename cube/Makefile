@@ -6,8 +6,8 @@ SRC =  ./init/map_init.c \
 	./init/clrdir_filler.c \
 	./init/map_filler.c \
 	./utils/utils.c \
-	./utils/utils_map.c \
-	./utils/utils2.c \
+	./utils/utils_mem.c \
+	./utils/utils_str.c \
 	./utils/ft_split.c \
 	./gnl/get_next_line.c \
 	./gnl/get_next_line_utils.c \

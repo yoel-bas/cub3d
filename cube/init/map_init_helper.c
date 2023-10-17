@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 23:56:26 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 23:01:53 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:34:54 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ int	dir_op(char x)
 		return (1);
 	else
 		return (0);
+}
+
+int	fullfilled(t_cube *cnt)
+{
+	if (!cnt->cp->n || !cnt->cp->w || !cnt->cp->e || !cnt->cp->s
+		|| !cnt->cl->fl || !cnt->cl->cl)
+		return (0);
+	return (1);
 }
 
 void	is_map(t_cube *cont, int *j)

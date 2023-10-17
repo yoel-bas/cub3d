@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   utils_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 13:38:32 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 13:54:52 by melayoub         ###   ########.fr       */
+/*   Created: 2023/10/17 12:00:28 by melayoub          #+#    #+#             */
+/*   Updated: 2023/10/17 12:00:33 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,25 @@ int	ft_strncmp(char *s1, char *s2, size_t n)
 	return (0);
 }
 
-void	ft_bzero(void *s, size_t n)
+char	*ft_strchr(const char *str, int c)
 {
-	unsigned char	*str;
-	unsigned int	i;
-
-	str = (unsigned char *)s;
-	i = 0;
-	while (i < n)
-	{
-		str[i] = 0;
-		i++;
-	}
+	while (*str != '\0' && *str != (char)c)
+		str++;
+	if (*str == (char) c)
+		return ((char *)str);
+	return (0);
 }
 
-void	*ft_calloc(size_t count, size_t size)
+int	ft_strcmp(char *s1, char *s2)
 {
-	char	*ptr;
+	int	i;
 
-	ptr = malloc(count * size);
-	if (!ptr)
-		return (NULL);
-	ft_bzero(ptr, count * size);
-	return (ptr);
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
+	{
+		i++;
+	}
+	return (s1[i] - s2[i]);
 }
 
 char	*ft_strcpy(char *src)
