@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:25:21 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/17 11:58:57 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:08:14 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	calc(t_cube *mg, int horz_distance, int vert_distance, double angle)
 		mg->check_vert = 1;
 		mg->ray_distance = vert_distance;
 	}
+	if (!mg->ray_distance)
+		mg->ray_distance = 2;
 	mg->perpdistance = mg->ray_distance * cos(angle - mg->player->r_angle);
 	mg->projection = (WIDTH / 2) / tan(mg->ray->fov_angle / 2);
 	mg->wallstrip = (TILE_SIZE / mg->perpdistance) * mg->projection;
@@ -80,7 +82,7 @@ void	cast_ray(t_cube *main_game, double angle, int *i)
 			main_game->ray->wall_vertx, main_game->ray->wall_verty);
 	calc(main_game, horz_distance, vert_distance, angle);
 	sight = sight_face(main_game);
-	texture(main_game, sight);	
+	texture(main_game, sight);
 	while (main_game->wall_top < main_game->wall_bottom)
 	{
 		main_game->mm = main_game->wall_top 

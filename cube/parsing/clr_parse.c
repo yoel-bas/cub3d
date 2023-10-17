@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:16:20 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/17 11:28:12 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:07:41 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,29 @@ void	count_commas(char *str)
 		ft_error("ERROR: incorrect RGB format");
 }
 
+int	check_dgts(char *num)
+{
+	int	i;
+
+	i = 0;
+	while (num[i])
+	{
+		if (!ft_is_digit(num[i]))
+			return (0);
+		i++;
+	}
+	i = 0;
+	while (num[i] == '0')
+		i++;
+	if (ft_strlen(&num[i]) > 3 || !ft_strlen(&num[i]))
+		return (0);
+	return (1);
+}
+
 void	clr_parse(char *str)
 {
 	char	**splt;
 	int		j;
-	int		i;
 
 	count_commas(str);
 	splt = ft_split(str, ',');
@@ -52,17 +70,10 @@ void	clr_parse(char *str)
 	j = 0;
 	while (splt[j])
 	{
+		if (!check_dgts(splt[j]))
+			ft_error("ERROR: incorrect RGB format");
 		if (ft_atoi(splt[j]) > 255 || ft_atoi(splt[j]) < 0)
 			ft_error("ERROR: incorrect RGB format");
-		i = 0;
-		while (splt[j][i])
-		{
-			if (splt[j][i] == '\n')
-				break ;
-			if (!ft_is_digit(splt[j][i]))
-				ft_error("ERROR: incorrect RGB format");
-			i++;
-		}
 		j++;
 	}
 	free_dbl (splt);
