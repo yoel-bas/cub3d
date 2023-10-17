@@ -67,6 +67,14 @@ void	dd_callback(void *param)
 	frame(main_game);
 }
 
+void	close_(void *param)
+{
+	t_cube	*main_game;
+
+	main_game = (t_cube *)param;
+	exit(1);
+}
+
 void	cub(t_cube *main_game)
 {
 	main_game->player = malloc(sizeof(t_player));
@@ -79,5 +87,6 @@ void	cub(t_cube *main_game)
 	ft_upload_texture_img(main_game);
 	frame(main_game);
 	mlx_loop_hook(main_game->mlx, dd_callback, main_game);
+	mlx_close_hook(main_game->mlx, close_, main_game);
 	mlx_loop(main_game->mlx);
 }

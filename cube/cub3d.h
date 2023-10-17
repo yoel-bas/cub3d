@@ -147,7 +147,6 @@ typedef struct element
 }				t_cube;
 
 void			ft_error(char *str);
-void			texture(t_cube *main_game, mlx_image_t *sight);
 char			*get_next_line(int fd);
 int				ft_is_digit(int c);
 int				ft_isalpha(int c);
@@ -195,6 +194,7 @@ void			read_components(t_cube *content);
 void			maper(t_cube	*content, char	*av);
 void			check_dir(char **map, t_cube *content);
 
+void			texture(t_cube *main_game, mlx_image_t *sight);
 void			ft_upload_texture_img(t_cube *content);
 void			player_init(t_cube *main_game);
 unsigned int	ft_pixel(unsigned int r, unsigned int g,

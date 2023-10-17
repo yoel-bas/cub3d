@@ -46,12 +46,14 @@ int	check_dgts(char *num)
 	i = 0;
 	while (num[i])
 	{
+		while (is_white_space(num[i]))
+			i++;
 		if (!ft_is_digit(num[i]))
 			return (0);
 		i++;
 	}
 	i = 0;
-	while (num[i] == '0')
+	while (num[i] == '0' || is_white_space(num[i]))
 		i++;
 	if (ft_strlen(&num[i]) > 3 || !ft_strlen(&num[i]))
 		return (0);

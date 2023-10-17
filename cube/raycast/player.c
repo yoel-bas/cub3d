@@ -65,8 +65,6 @@ void	player_update(t_cube *mg)
 	old_y = mg->player->y;
 	mg->player->x += cos(mg->player->r_angle) * mg->player->steps;
 	mg->player->y += sin(mg->player->r_angle) * mg->player->steps;
-	mg->player->x_r = mg->player->x + cos(mg->player->r_angle) * 40;
-	mg->player->y_r = mg->player->y + sin(mg->player->r_angle) * 40;
 	if (is_wall(mg, mg->player->x, mg->player->y) || between(mg, old_x, old_y))
 	{
 		mg->player->x = old_x;
