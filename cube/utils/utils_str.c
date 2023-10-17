@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:00:28 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/17 12:00:33 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/17 23:52:48 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,20 @@ char	*ft_strchr(const char *str, int c)
 	return (0);
 }
 
+char	*ft_strrchr(char *s, int c)
+{
+	int	len;
+
+	len = ft_strlen((char *)s);
+	while (len >= 0)
+	{
+		if (s[len] == (char)c)
+			return ((char *)s + len);
+		len--;
+	}
+	return (NULL);
+}
+
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
@@ -49,26 +63,6 @@ int	ft_strcmp(char *s1, char *s2)
 		i++;
 	}
 	return (s1[i] - s2[i]);
-}
-
-char	*ft_strcpy(char *src)
-{
-	int		i;
-	size_t	len;
-	char	*dest;
-
-	len = strlen(src);
-	i = 0;
-	dest = (char *)malloc((len + 1) * sizeof(char));
-	if (!dest)
-		ft_error("Error: allocation error!");
-	while (src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
 }
 
 int	ft_atoi(const char *str)

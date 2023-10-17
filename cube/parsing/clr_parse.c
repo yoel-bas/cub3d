@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:16:20 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/17 20:04:21 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/17 23:47:06 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,9 @@ int	check_dgts(char *num)
 	i = 0;
 	while (num[i] == '0' || is_white_space(num[i]))
 		i++;
+	printf("|%zu|\n", ft_strlen(&num[i]));
 	if (ft_strlen(&num[i]) > 3 || !ft_strlen(&num[i]))
-		return (0);
+		return (puts("fk"), 0);
 	return (1);
 }
 
@@ -74,18 +75,23 @@ void	clr_parse(char *str)
 {
 	char	**splt;
 	int		j;
+	char	*alloc;
 
 	count_commas(str);
 	splt = ft_split(str, ',');
 	if (ft_count(splt) != 3)
-		ft_error("ERROR: incorrect RGB format");
+		ft_error("ERROR: incorrect RGB format3");
+	printf("--> |%d|\n", ft_atoi(splt[1]));
 	j = 0;
 	while (splt[j])
 	{
-		if (!check_dgts(splt[j]))
-			ft_error("ERROR: incorrect RGB format");
-		if (ft_atoi(splt[j]) > 255 || ft_atoi(splt[j]) < 0)
-			ft_error("ERROR: incorrect RGB format");
+		alloc = ft_strtrim(splt[j], " \t");
+		printf("splt |%s|", splt[j]);
+		if (ft_atoi(alloc) != 0 && !check_dgts(alloc))
+			ft_error("ERROR: incorrect RGB format1");
+		if (ft_atoi(alloc) > 255 || ft_atoi(alloc) < 0)
+			ft_error("ERROR: incorrect RGB format0");
+		free (alloc);
 		j++;
 	}
 	free_dbl (splt);

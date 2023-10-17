@@ -8,6 +8,7 @@ SRC =  ./init/map_init.c \
 	./utils/utils.c \
 	./utils/utils_mem.c \
 	./utils/utils_str.c \
+	./utils/utils_strmem.c \
 	./utils/ft_split.c \
 	./gnl/get_next_line.c \
 	./gnl/get_next_line_utils.c \
@@ -25,7 +26,7 @@ SRC =  ./init/map_init.c \
 	cub3d.c \
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -Ofast
 
 
 OBJ = $(SRC:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:58:43 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/17 19:58:38 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/17 23:49:37 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define CUB3D_H
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 3
-#  define HEIGHT 720
-#  define WIDTH 1200
+#  define HEIGHT 1080
+#  define WIDTH 1920
 #  define TILE_SIZE 64
 #  define SCALE 0.2
 # endif
@@ -168,6 +168,8 @@ void			ft_bzero(void *s, size_t n);
 void			*ft_calloc(size_t count, size_t size);
 char			*ft_strcpy(char *src);
 int				ft_atoi(const char *str);
+char			*ft_strrchr(char *s, int c);
+char			*ft_strtrim(char *s1, char *set);
 
 void			player_pos_dir(char **file);
 void			check_extension(char *path);
@@ -194,7 +196,7 @@ void			read_components(t_cube *content);
 void			maper(t_cube	*content, char	*av);
 void			check_dir(char **map, t_cube *content);
 int				ft_count(char **spt);
-
+void			ft_parser(t_cube *content);
 void			texture(t_cube *main_game, mlx_image_t *sight);
 void			ft_upload_texture_img(t_cube *content);
 void			player_init(t_cube *main_game);
