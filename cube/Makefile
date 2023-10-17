@@ -25,15 +25,14 @@ SRC =  ./init/map_init.c \
 	cub3d.c \
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror 
-RM = rm -rf
+CFLAGS = -Wall -Wextra -Werror
+
 
 OBJ = $(SRC:.c=.o)
 
 all: ${NAME}
 
 ${NAME}: $(OBJ)
-	# $(CC) $(CFLAGS) $^ -lmlx -framework OpenGL -framework AppKit  -o $@
 	$(CC) $(CFLAGS) $^ ../MLX42/build/libmlx42.a -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -o $@
 
 %.o: %.c $(HEADER)

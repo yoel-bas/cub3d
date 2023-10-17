@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:58:43 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/17 11:24:19 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/17 19:58:38 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,7 @@ void			clr_parse(char *str);
 void			read_components(t_cube *content);
 void			maper(t_cube	*content, char	*av);
 void			check_dir(char **map, t_cube *content);
+int				ft_count(char **spt);
 
 void			texture(t_cube *main_game, mlx_image_t *sight);
 void			ft_upload_texture_img(t_cube *content);

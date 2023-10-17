@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 23:40:21 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 14:09:45 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/17 20:01:28 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,15 @@ int	line_counter(char *av)
 	return (count);
 }
 
+void	bottom_trim(char **file)
+{
+	int	end;
+
+	end = ft_count(file) - 1;
+	while (file[end][0] == '\n')
+		file[end--] = 0;
+}
+
 void	maper(t_cube	*content, char	*av)
 {
 	char	*line;
@@ -69,4 +78,5 @@ void	maper(t_cube	*content, char	*av)
 		content->lmt->file[i++] = res;
 		free(line);
 	}
+	bottom_trim(content->lmt->file);
 }

@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:16:20 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/17 13:07:41 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/17 20:04:21 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ void	free_dbl(char **str)
 	while (str[i])
 		free(str[i++]);
 	free(str);
+}
+
+int	ft_count(char **spt)
+{
+	int	l;
+
+	l = 0;
+	while (spt[l])
+		l++;
+	return (l);
 }
 
 void	count_commas(char *str)
@@ -67,7 +77,7 @@ void	clr_parse(char *str)
 
 	count_commas(str);
 	splt = ft_split(str, ',');
-	if (!splt[2] || splt[3])
+	if (ft_count(splt) != 3)
 		ft_error("ERROR: incorrect RGB format");
 	j = 0;
 	while (splt[j])
