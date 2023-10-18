@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 23:40:21 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/18 01:29:36 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 11:03:03 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	line_counter(char *av)
 	count = 0;
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
-		ft_error("ERROR: map_file not found!");
+		ft_error("map_file not found!\n");
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -70,7 +70,7 @@ void	maper(t_cube	*content, char	*av)
 	i = 0;
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
-		ft_error("ERROR: map_file not found!");
+		ft_error("map_file not found!\n");
 	content->lmt->file = ft_calloc(sizeof(char *), line_counter(av) + 1);
 	while (1)
 	{
@@ -82,9 +82,4 @@ void	maper(t_cube	*content, char	*av)
 		free(line);
 	}
 	bottom_trim(content->lmt->file);
-	// 	int z = 0;
-	// while(content->lmt->map[z])
-	// {
-	// 	z++;
-	// }
 }

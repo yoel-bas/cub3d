@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:51:41 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/17 23:52:59 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 10:59:26 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strcpy(char *src)
 	i = 0;
 	dest = (char *)malloc((len + 1) * sizeof(char));
 	if (!dest)
-		ft_error("Error: allocation error!");
+		ft_error("allocation error!");
 	while (src[i])
 	{
 		dest[i] = src[i];

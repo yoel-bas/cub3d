@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 21:22:27 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 01:03:24 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 10:57:58 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	check_extension(char *path)
 				return ;
 			i++;
 		}
-		ft_error("ERROR: not a '.cub' format");
+		ft_error("Not a '.cub' format!");
 	}
 	else
-		ft_error("ERROR: unexistant map");
+		ft_error("Unexistant map!");
 }

@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 23:56:26 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/17 10:34:54 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 10:50:48 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	is_map(t_cube *cont, int *j)
 	if (cont->lmt->file[*j] && fullfilled(cont))
 		ft_fill_map(cont, j);
 	else
-		ft_error("Error: components order");
+		ft_error("Error: components order\n");
 }
 
 void	read_components(t_cube *cont)
@@ -62,5 +62,5 @@ void	read_components(t_cube *cont)
 		j++;
 	}
 	if (!cont->lmt->file[j])
-		ft_error("empty map!");
+		ft_error("empty map!\n");
 }

@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 23:50:57 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/18 01:38:08 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 10:59:55 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_error(char *str)
 {
+	write (2, "Error:\n", 7);
 	write (2, str, ft_strlen(str));
-	write (2, "\n", 1);
 	exit (1);
 }
 

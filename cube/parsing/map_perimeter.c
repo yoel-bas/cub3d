@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 04:28:07 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 13:46:19 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 10:57:15 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_top(char **map)
 		while (is_whitesp_butnl(map[0][i]))
 			i++;
 		if (map[0][i] != '1')
-			ft_error("ERROR: Missing walls!");
+			ft_error("Missing walls!");
 		i++;
 	}
 }
@@ -46,7 +46,7 @@ void	check_bottom(char **map)
 		while (is_whitesp_butnl(map[j][i]))
 			i++;
 		if (map[j][i] != '1')
-			ft_error("ERROR: Missing walls!");
+			ft_error("Missing walls!");
 		i++;
 	}
 }
@@ -63,7 +63,7 @@ void	check_sides(char **map)
 		while (is_whitesp_butnl(map[j][i]))
 			i++;
 		if (map[j][i] != '1' || map[j][ft_strlen(map[j]) - 2] != '1')
-			ft_error("ERROR: Missing walls!");
+			ft_error("Missing walls!");
 		j++;
 	}
 }

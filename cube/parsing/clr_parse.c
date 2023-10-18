@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:16:20 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/17 23:56:41 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 10:52:18 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	count_commas(char *str)
 		i++;
 	}
 	if (c_count != 2)
-		ft_error("ERROR: incorrect RGB format");
+		ft_error("incorrect RGB format\n");
 }
 
 int	check_dgts(char *num)
@@ -79,15 +79,15 @@ void	clr_parse(char *str)
 	count_commas(str);
 	splt = ft_split(str, ',');
 	if (ft_count(splt) != 3)
-		ft_error("ERROR: incorrect RGB format3");
+		ft_error("incorrect RGB format\n");
 	j = 0;
 	while (splt[j])
 	{
 		alloc = ft_strtrim(splt[j], " \t");
 		if (ft_atoi(alloc) != 0 && !check_dgts(alloc))
-			ft_error("ERROR: incorrect RGB format1");
+			ft_error("incorrect RGB format\n");
 		if (ft_atoi(alloc) > 255 || ft_atoi(alloc) < 0)
-			ft_error("ERROR: incorrect RGB format0");
+			ft_error("incorrect RGB format\n");
 		free (alloc);
 		j++;
 	}

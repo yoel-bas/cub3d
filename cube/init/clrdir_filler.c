@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:47:49 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 14:54:52 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 10:49:36 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_fill(char *line, int flag)
 	else
 		i += 1;
 	if (!is_white_space(line[i]))
-		ft_error("ERROR: incorrect dir/clr syntax!");
+		ft_error("incorrect dir/clr syntax!\n");
 	while (is_white_space(line[i]))
 		i++;
 	start = i;
@@ -52,7 +52,7 @@ void	ft_is_clr(char *line, t_cube *cnt)
 	else if (line[i] == 'C' && !cnt->cl->cl)
 		cnt->cl->cl = ft_fill(line, 1);
 	else
-		ft_error("ERROR: floor/ceiling plan!");
+		ft_error("floor/ceiling plan!\n");
 	free(line);
 }
 
@@ -72,6 +72,6 @@ void	ft_is_dir(char *line, t_cube *cnt)
 	else if (line[i] == 'W' && line[i + 1] == 'E' && !cnt->cp->w)
 		cnt->cp->w = ft_fill(line, 2);
 	else
-		ft_error("ERROR: Player Orientation!");
+		ft_error("Player Orientation!\n");
 	free(line);
 }

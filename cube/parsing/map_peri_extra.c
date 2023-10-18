@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 02:07:07 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/18 01:17:05 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 11:06:13 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ void	recheck_rev(char **map)
 		i = 0;
 		while (map[j][i])
 		{
-			if (map[j][i] == '0' || map[j][i] == 'E' || map[j][i] == 'W' || map[j][i] == 'S' || map[j][i] == 'N')
+			if (map[j][i] == '0' || map[j][i] == 'E' || map[j][i] == 'W'
+				|| map[j][i] == 'S' || map[j][i] == 'N')
 			{
-				if(map[j][i - 1] && is_white_space(map[j][i - 1]))
-					ft_error("ERROR: Unsealed map");
+				if (map[j][i - 1] && is_white_space(map[j][i - 1]))
+					ft_error("Unsealed map!\n");
 			}
 			i++;
 		}
@@ -49,7 +50,7 @@ void	check_extranous_spaces(char **map)
 				|| map[j][i] == 'E' || map[j][i] == 'W'))
 			{
 				if (map[j][i + 1] && is_white_space(map[j][i + 1]))
-					ft_error("ERROR unsealed perimetre");
+					ft_error("unsealed map!\n");
 			}
 			i++;
 		}
@@ -77,7 +78,7 @@ void	check_inner_extranous(char **map)
 				printf("+1 %d\n", map[j + 1][i]);
 				if ((map[j - 1][i] && is_whitesp_butnl(map[j - 1][i]))
 				|| (map[j + 1][i] && is_whitesp_butnl(map[j + 1][i])))
-					ft_error("ERROR: Unsealed perimeter (mid_map)");
+					ft_error("Unsealed map!\n");
 			}
 			i++;
 		}
@@ -99,7 +100,7 @@ void	norm_extranous(char **map, int j)
 		while (is_whitesp_butnl(map[j - 1][x]))
 			x++;
 		if (map[j - 1][x] != '1')
-			ft_error("ERROR: Unsealed perimeter (west_side)1");
+			ft_error("Unsealed map!\n");
 	}
 	x = -1;
 	if (map[j + 1])
@@ -109,7 +110,7 @@ void	norm_extranous(char **map, int j)
 			while (is_whitesp_butnl(map[j + 1][x]))
 				x++;
 			if (map[j + 1][x] != '1')
-				ft_error("ERROR: Unsealed perimeter (west_side2)");
+				ft_error("Unsealed map!\n");
 		}
 	}
 }

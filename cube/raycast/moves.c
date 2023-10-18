@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 22:37:27 by yoel-bas          #+#    #+#             */
-/*   Updated: 2023/10/17 23:52:29 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 10:59:16 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	cub(t_cube *main_game)
 	get_border(main_game);
 	player_init(main_game);
 	if (!WIDTH || !HEIGHT)
-		ft_error("HD");
+		ft_error("Window size 0");
 	main_game->mlx = mlx_init(WIDTH, HEIGHT, "cube", FALSE);
 	main_game->image = mlx_new_image(main_game->mlx, WIDTH, HEIGHT);
 	ft_upload_texture_img(main_game);

@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 02:36:45 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 13:34:46 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 10:53:39 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,20 +94,20 @@ void	check_dir(char **map, t_cube *content)
 			i++;
 			if (content->dir_flag && (map[j][i] == 'N' || map[j][i] == 'S'
 				|| map[j][i] == 'E' || map[j][i] == 'W'))
-				ft_error ("ERROR: use of multiple dirrections");
+				ft_error ("Use of multiple dirrections\n");
 		}
 		j++;
 	}
 	if (!content->dir_flag)
-		ft_error("ERROR: missing dirrection.");
+		ft_error("Missing dirrection\n");
 }
 
 void	check_components(char **map)
 {
 	if (comp_counter(map, '1') < 1)
-		ft_error("ERROR: No walls!");
+		ft_error("No walls!\n");
 	if (comp_counter(map, '0') < 1)
-		ft_error("ERROR: No space to roam!");
+		ft_error("No space to roam!\n");
 	else
 		return ;
 }

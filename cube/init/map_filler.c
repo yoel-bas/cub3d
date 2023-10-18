@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:45:16 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/18 01:47:14 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 11:02:40 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_empty_line(char *line)
 	while (is_white_space(line[i]))
 		i++;
 	if (!line[i])
-		ft_error("ERROR: empty line in map!");
+		ft_error("empty line in map!\n");
 	else
 		return ;
 }
@@ -64,25 +64,17 @@ void	ft_fill_map(t_cube *content, int *j)
 	len = line_count(content->lmt->file, &(*j)); 
 	content->lmt->map = malloc(sizeof(char **) * len);
 	if (!content->lmt->map)
-		ft_error("ERROR: alloc error!");
+		ft_error("alloc error!\n");
 	while (content->lmt->file[*j])
 	{
 		content->lmt->map[y] = ft_strdup(content->lmt->file[*j]);
-		printf("%s", content->lmt->map[y]);
 		ft_empty_line (content->lmt->map[y]);
 		(*j)++;
 		y++;
 	}
 	content->lmt->map[y] = NULL;
-
 	check_inner_extranous(content->lmt->map);
 	recheck_rev(content->lmt->map);
-	// check_extranous_spaces(content->lmt->map);
 	check_extranous_revsp(content->lmt->map);
-	// check_top(content->lmt->map);
-	// check_bottom(content->lmt->map);
-	// check_dir(content->lmt->map, content);
-	// if (!foreign_material(content->lmt->map))
-		// ft_error("foreing material");
 	ft_rearrange(content);
 }
