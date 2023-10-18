@@ -45,6 +45,7 @@ int	line_counter(char *av)
 		line = get_next_line(fd);
 		count++;
 	}
+	close (fd);
 	return (count);
 }
 
@@ -82,4 +83,5 @@ void	maper(t_cube	*content, char	*av)
 		free(line);
 	}
 	bottom_trim(content->lmt->file);
+	close (fd);
 }
