@@ -1,11 +1,29 @@
 NO textures/berlin oo.png
 SO textures/wall.png 
 EA textures/ussr.png
-WE textures/us.png
+
+
 C  4,66,65
+
 F   88,8,85
 
-1 1111 1 1 1 1 111 1111
- 1 11 1 1 11 1 1N1 11011
- 1 1 1 11 1 11 11111101111 1 101 1
- 111111111111111111111
+
+
+WE textures/us.png
+
+11111
+11101
+10111111
+111001001
+111N00011
+111111111
+
+
+
+
+
+
+
+
+
+

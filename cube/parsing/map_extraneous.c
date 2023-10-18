@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 02:07:07 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/18 13:16:26 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 18:31:33 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ void	ft_line_check(char *lng, char *shrt)
 	i = ft_strlen(shrt);
 	while (lng[i])
 	{
-		if ((lng[i] != '1' && !is_white_space(lng[i])) || lng[i] == '0')
+		if ((lng[i] != '1' && !is_white_space(lng[i]))
+			|| lng[i] == '0' || dir_op(lng[i]))
 			ft_error("ERROR: Unsealed perimeter");
 		i++;
 	}

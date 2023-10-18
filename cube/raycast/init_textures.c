@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:35:56 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/18 10:58:16 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 18:32:37 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ double	distance(double x, double y, double x1, double y1)
 void	texture(t_cube *main_game, mlx_image_t *sight)
 {
 	if (main_game->check_vert)
-		main_game->texturs_x = (int)(main_game->ray->wall_verty
-				* ((float)sight->width / TILE_SIZE)) % sight->width;
+		main_game->texturs_x = (fmod(main_game->ray->wall_verty, TILE_SIZE))
+			* ((float)sight->width / TILE_SIZE);
 	else
-		main_game->texturs_x = (int)(main_game->ray->wall_horzx
-				* ((float)sight->width / TILE_SIZE)) % sight->width;
+		main_game->texturs_x = (fmod(main_game->ray->wall_horzx, TILE_SIZE))
+			* ((float)sight->width / TILE_SIZE);
 }

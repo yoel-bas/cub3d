@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:45:16 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/18 13:12:45 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:12:55 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_fill_map(t_cube *content, int *j)
 	int	len;
 
 	y = 0;
-	len = line_count(content->lmt->file, &(*j)); 
+	len = line_count(content->lmt->file, j); 
 	content->lmt->map = malloc(sizeof(char **) * len);
 	if (!content->lmt->map)
 		ft_error("alloc error!\n");

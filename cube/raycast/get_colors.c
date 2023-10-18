@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:44:39 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/16 17:02:07 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:42:11 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ unsigned int	get_color(mlx_image_t *sight,
 {
 	uint8_t	*colors;
 
-	if (sight == NULL || sight == NULL
-		|| y_texture >= sight->height || x_texture >= sight->width)
+	if (sight == NULL || y_texture >= sight->height
+		|| x_texture >= sight->width)
 		return (0);
 	colors = &sight->pixels[(y_texture * (sight->width * 4) + x_texture * 4)];
 	return (ft_pixel(colors[0], colors[1], colors[2], colors[3]));
