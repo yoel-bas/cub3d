@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:45:16 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/17 22:00:15 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 01:47:14 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,16 @@ void	ft_fill_map(t_cube *content, int *j)
 		ft_error("ERROR: alloc error!");
 	while (content->lmt->file[*j])
 	{
-		content->lmt->map[y] = ft_strcpy(content->lmt->file[*j]);
+		printf("fl: |%s|", content->lmt->file[*j]);
+		content->lmt->map[y] = ft_strdup(content->lmt->file[*j]);
+		printf("mp: |%s|", content->lmt->map[y]);
 		ft_empty_line (content->lmt->map[y]);
 		(*j)++;
 		y++;
 	}
 	content->lmt->map[y] = NULL;
+
+	check_inner_extranous(content->lmt->map);
 	check_extranous_spaces(content->lmt->map);
 	check_extranous_revsp(content->lmt->map);
 	check_top(content->lmt->map);

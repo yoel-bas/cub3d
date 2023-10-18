@@ -6,16 +6,22 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:55:29 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/17 23:43:43 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/17 23:55:45 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	d()
+{
+	system("leaks cub3D");
+}
+
 int	main(int ac, char **av)
 {
 	t_cube	main_game;
 
+	atexit(d);
 	if (ac == 2)
 	{
 		check_extension(av[1]);

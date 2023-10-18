@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:58:43 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/17 23:49:37 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 00:50:51 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ char			*ft_strcpy(char *src);
 int				ft_atoi(const char *str);
 char			*ft_strrchr(char *s, int c);
 char			*ft_strtrim(char *s1, char *set);
+void			check_inner_extranous(char **map);
 
 void			player_pos_dir(char **file);
 void			check_extension(char *path);

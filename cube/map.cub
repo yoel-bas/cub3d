@@ -1,16 +1,10 @@
 NO textures/berlin oo.png
-SO textures/wall.png
+SO textures/wall.png 
 EA textures/ussr.png
 WE textures/us.png
-C  , 5,
-F   88,8,85  
-111111111111111111111111
-1010000E000000000000001
-1000000100000000000001
-1111111111111111111111
-
-
-
-
-
-
+C  0, 0, 100
+F   88,8,85
+    11111111
+      101111111
+        100N0001
+	111111111111

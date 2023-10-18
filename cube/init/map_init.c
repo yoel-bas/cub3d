@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 23:40:21 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/17 23:10:08 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 01:29:36 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,9 @@ void	maper(t_cube	*content, char	*av)
 		free(line);
 	}
 	bottom_trim(content->lmt->file);
+	// 	int z = 0;
+	// while(content->lmt->map[z])
+	// {
+	// 	z++;
+	// }
 }
