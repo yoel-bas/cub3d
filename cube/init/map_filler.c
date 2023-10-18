@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:45:16 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/18 11:02:40 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:12:45 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ void	ft_fill_map(t_cube *content, int *j)
 		y++;
 	}
 	content->lmt->map[y] = NULL;
+	check_extra_len(content->lmt->map);
+	ext_updwn(content->lmt->map);
+	check_extranous_spaces(content->lmt->map);
 	check_inner_extranous(content->lmt->map);
 	recheck_rev(content->lmt->map);
 	check_extranous_revsp(content->lmt->map);

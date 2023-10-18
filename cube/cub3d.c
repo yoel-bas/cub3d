@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:55:29 by melayoub          #+#    #+#             */
-/*   Updated: 2023/10/18 11:07:36 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:26:54 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_parser(t_cube *content)
 	check_top(content->lmt->map);
 	check_bottom(content->lmt->map);
 	check_sides(content->lmt->map);
-	check_extranous_spaces(content->lmt->map);
 	check_dir(content->lmt->map, content);
 }
 

@@ -13,8 +13,9 @@ SRC =  ./init/map_init.c \
 	./gnl/get_next_line.c \
 	./gnl/get_next_line_utils.c \
 	./parsing/path_parse.c \
-	./parsing/map_perimeter.c \
-	./parsing/map_peri_extra.c \
+	./parsing/map_perimetre.c \
+	./parsing/map_extraneous.c \
+	./parsing/map_extraneous2.c \
 	./parsing/map_components.c \
 	./parsing/clr_parse.c\
 	./raycast/init_textures.c \
