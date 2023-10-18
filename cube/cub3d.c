@@ -17,6 +17,17 @@ void	d()
 	system("leaks cub3D");
 }
 
+void	ft_parser(t_cube *content)
+{
+	if (!foreign_material(content->lmt->map))
+		ft_error("foreing material");
+	check_top(content->lmt->map);
+	check_bottom(content->lmt->map);
+	check_sides(content->lmt->map);
+	check_extranous_spaces(content->lmt->map);
+	check_dir(content->lmt->map, content);
+}
+
 int	main(int ac, char **av)
 {
 	t_cube	main_game;
@@ -30,6 +41,7 @@ int	main(int ac, char **av)
 		main_game.lmt = ft_calloc(sizeof(t_elem), 1);
 		maper(&main_game, av[1]); 
 		read_components(&main_game);
+		ft_parser(&main_game);
 		cub(&main_game);
 	}
 	else

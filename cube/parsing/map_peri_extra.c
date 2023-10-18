@@ -12,6 +12,28 @@
 
 #include "../cub3d.h"
 
+void	recheck_rev(char **map)
+{
+	int	j;
+	int	i;
+
+	j = 0;
+	while (map[j])
+	{
+		i = 0;
+		while (map[j][i])
+		{
+			if (map[j][i] == '0' || map[j][i] == 'E' || map[j][i] == 'W' || map[j][i] == 'S' || map[j][i] == 'N')
+			{
+				if(map[j][i - 1] && is_white_space(map[j][i - 1]))
+					ft_error("ERROR: Unsealed map");
+			}
+			i++;
+		}
+		j++;
+	}
+}
+
 void	check_extranous_spaces(char **map)
 {
 	int	j;

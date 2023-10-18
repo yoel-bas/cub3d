@@ -67,9 +67,8 @@ void	ft_fill_map(t_cube *content, int *j)
 		ft_error("ERROR: alloc error!");
 	while (content->lmt->file[*j])
 	{
-		printf("fl: |%s|", content->lmt->file[*j]);
 		content->lmt->map[y] = ft_strdup(content->lmt->file[*j]);
-		printf("mp: |%s|", content->lmt->map[y]);
+		printf("%s", content->lmt->map[y]);
 		ft_empty_line (content->lmt->map[y]);
 		(*j)++;
 		y++;
@@ -77,12 +76,13 @@ void	ft_fill_map(t_cube *content, int *j)
 	content->lmt->map[y] = NULL;
 
 	check_inner_extranous(content->lmt->map);
-	check_extranous_spaces(content->lmt->map);
+	recheck_rev(content->lmt->map);
+	// check_extranous_spaces(content->lmt->map);
 	check_extranous_revsp(content->lmt->map);
-	check_top(content->lmt->map);
-	check_bottom(content->lmt->map);
-	check_dir(content->lmt->map, content);
-	if (!foreign_material(content->lmt->map))
-		ft_error("foreing material");
+	// check_top(content->lmt->map);
+	// check_bottom(content->lmt->map);
+	// check_dir(content->lmt->map, content);
+	// if (!foreign_material(content->lmt->map))
+		// ft_error("foreing material");
 	ft_rearrange(content);
 }

@@ -171,6 +171,7 @@ int				ft_atoi(const char *str);
 char			*ft_strrchr(char *s, int c);
 char			*ft_strtrim(char *s1, char *set);
 void			check_inner_extranous(char **map);
+void			recheck_rev(char **map);
 
 void			player_pos_dir(char **file);
 void			check_extension(char *path);
